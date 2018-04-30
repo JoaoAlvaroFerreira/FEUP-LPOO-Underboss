@@ -44,7 +44,7 @@
 
 **Dynamic Diagram Documentation**
 
- ![]()
+ ![](https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/finalprojectbranch/imgs/DIA2.jpg)
 
 ** **
 
@@ -68,14 +68,16 @@
 
 **User Manual**
 
- ![]()
+
+ ![](https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/finalprojectbranch/imgs/Init.png)
 **Main Menu**
 
 - Start Game – Plays the game
 - Options – Goes to the Settings Menu
 - Quit – Exits the app
 
- ![]()
+
+ ![](https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/finalprojectbranch/imgs/Options.png)
 
 **Options Menu**
 
@@ -85,7 +87,7 @@
 - Difficulty – sets the game&#39;s difficulty
 - Background color – changes the color for the menu backgrounds
 
- ![]()
+ ![](https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/finalprojectbranch/imgs/In-Game.png)
 
 **In-Game**
 
@@ -93,3 +95,5 @@
 - Player can move and shoot in eight directions
 - Boss also moves and shoots, having a variety of different possible attacks, reacting to the player&#39;s actions
 - Game ends when either the boss or the player dies
+
+ ![](https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/finalprojectbranch/imgs/In-Game.png)

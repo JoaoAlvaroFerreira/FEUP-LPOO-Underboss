@@ -1,14 +1,16 @@
 package com.underboss.game;
 
-public abstract class Character {
+import com.badlogic.gdx.math.Rectangle;
 
-    int x;
-    int y;
+public abstract class Character extends Rectangle {
+
+
+    int HP;
     String status;
 
     Character(){
-        x = 500;
-        y = 500;
+        x = 240;
+        y = 400;
         status = "Normal";
     }
 
@@ -24,12 +26,12 @@ public abstract class Character {
         status = actstatus;
     }
 
-    public int getX() {
-        return x;
+    public int getHP() {
+        return HP;
     }
 
-    public int getY() {
-        return y;
+    public void setHP(int HP) {
+        this.HP = HP;
     }
 
     public String getStatus() {

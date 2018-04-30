@@ -2,7 +2,7 @@
 
 **Class Diagram Documentation**
 
- ![]()
+ ![](https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/finalprojectbranch/imgs/DIA1.jpg)
 
 - **Entity Model** : An abstract model representing an entity which belongs to a game model. Stores the position of the model;
 

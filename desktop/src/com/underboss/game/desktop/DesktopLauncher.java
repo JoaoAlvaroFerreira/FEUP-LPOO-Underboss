@@ -2,7 +2,7 @@ package com.underboss.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.underboss.game.StartGame;
+import com.underboss.game.Underboss;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
@@ -10,6 +10,6 @@ public class DesktopLauncher {
 		config.title = "Underboss";
 		config.width = 800;
 		config.height = 480;
-		new LwjglApplication(new StartGame(), config);
+		new LwjglApplication(new Underboss(), config);
 	}
 }

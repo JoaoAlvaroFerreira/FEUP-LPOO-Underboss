@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.underboss.game.Control.GameManager;
 import com.underboss.game.Model.Projectile;
@@ -82,26 +83,35 @@ public class Ecra implements Screen {
         game.batch.end();
 
 
-       manager.processUserInput();
+       manager.inputs().processUserInput();
+       manager.logic(delta);
 
     }
 
 
 
     public void drawProjectiles(){
-        for (Projectile tiro : manager.bossBullets) {
+
+
+
+
+       drawIndividualProjectiles(manager.bossBullets);
+       drawIndividualProjectiles(manager.heroBullets);
+    }
+
+
+    public void drawIndividualProjectiles(Array<Projectile> balas){
+        for (Projectile tiro : balas) {
+
+           if(tiro.getHeight() < 0)
+              balas.removeValue(tiro, true);
+
             OriginX = (int) tiro.getWidth() / 2;
             OriginY = (int) tiro.getHeight() / 2;
             TextureRegion regiao = new TextureRegion(tiro.getImagem());
-            game.batch.draw(regiao, tiro.getX(), tiro.getY(), OriginX, OriginY, regiao.getRegionWidth(), regiao.getRegionHeight(), 1, 1, 270);
+            game.batch.draw(regiao, tiro.getX(), tiro.getY(), OriginX, OriginY, regiao.getRegionWidth(), regiao.getRegionHeight(), 1, 1, tiro.getDisparou().getAngle());
         }
 
-        for (Projectile tiro : manager.heroBullets) {
-            OriginX = (int) tiro.getWidth() / 2;
-            OriginY = (int) tiro.getHeight() / 2;
-            TextureRegion regiao = new TextureRegion(tiro.getImagem());
-            game.batch.draw(regiao, tiro.getX(), tiro.getY(), OriginX, OriginY, regiao.getRegionWidth(), regiao.getRegionHeight(), 1, 1, 90);
-        }
     }
 
     @Override
@@ -129,7 +139,7 @@ public class Ecra implements Screen {
 
     @Override
     public void dispose() {
-      // tiroBoss.dispose();
+      //tiroBoss.dispose();
         //dropImage.dispose();
        // bucketImage.dispose();
        // dropSound.dispose();

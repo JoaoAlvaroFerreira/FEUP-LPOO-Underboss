@@ -32,4 +32,22 @@ public class Player extends Character {
         this.y = y;
     }
 
+    public void walkUp(){
+        setY(this.getY() + 400 * Gdx.graphics.getDeltaTime());
+    };
+
+    public void walkDown(){
+        setY(this.getY() - 400 * Gdx.graphics.getDeltaTime());
+    };
+
+    public void walkLeft(){
+        setX(this.getX() - 400 * Gdx.graphics.getDeltaTime());
+    };
+
+    public void walkRight(){
+        setX(this.getX() + 400 * Gdx.graphics.getDeltaTime());
+    };
+
+
+
 }

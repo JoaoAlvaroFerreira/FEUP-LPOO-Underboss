@@ -55,6 +55,7 @@ public class Projectile extends Rectangle {
         return imagem;
     }
 
-
-
+    public Character getDisparou() {
+        return disparou;
+    }
 }

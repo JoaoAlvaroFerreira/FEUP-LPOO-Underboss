@@ -10,7 +10,7 @@ public class Projectile extends Rectangle {
     int speed;
     int direction; //0-360, começando em apontando para cima
     int acceleration;
-    float angle;
+    double angle;
 
     Texture imagem;
     Texture tiroBoss = new Texture(Gdx.files.internal("bossShot1.png"));
@@ -46,7 +46,11 @@ public class Projectile extends Rectangle {
 
     public void setAngle(float angle){ this.angle = angle;};
 
-    public float getAngle(){return angle;}
+    public double getAngle(){return Math.toRadians(angle);}
+
+    public double getAngleDegrees(){return angle;}
+
+    public int getSpeed(){return speed;}
 
     public void setBossTiro(){
         imagem = tiroBoss;

@@ -5,11 +5,13 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector3;
 import com.underboss.game.Model.Player;
+import com.underboss.game.View.Ecra;
 
 public class MyInputProcessor implements InputProcessor {
 
     Player jogador;
     GameManager controlo;
+    Ecra camera;
 
     public MyInputProcessor(Player jogador){
 
@@ -20,14 +22,19 @@ public class MyInputProcessor implements InputProcessor {
         this.controlo = controlo;
     }
 
+    public void setCamera(Ecra camera){this.camera = camera;}
+
     public void processUserInput(){
 
         // process user input
-        if (Gdx.input.isTouched()) {
+        if(Gdx.input.isTouched()) {
             Vector3 touchPos = new Vector3();
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            jogador.setX(touchPos.x - 100 / 2);
+            camera.getCamera().unproject(touchPos);
+            jogador.setX(touchPos.x - 64 / 2);
+            jogador.setY(touchPos.y - 64/ 2);
         }
+
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
             jogador.walkLeft();
@@ -39,8 +46,17 @@ public class MyInputProcessor implements InputProcessor {
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
             jogador.walkDown();
 
-        if(Gdx.input.getGyroscopeX() != 0)
-       controlo.heroFire(0);
+
+
+            if(Gdx.input.getGyroscopeX() > 0.5)
+                controlo.heroFire(0);
+            if(Gdx.input.getGyroscopeX() < -0.5)
+                controlo.heroFire(180);
+            if(Gdx.input.getGyroscopeY() > 0.5)
+                controlo.heroFire(90);
+            if(Gdx.input.getGyroscopeY() < -0.5)
+                controlo.heroFire(270);
+
 
 //        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)){
 //            jogador();
@@ -49,32 +65,20 @@ public class MyInputProcessor implements InputProcessor {
     }
 
     public boolean keyDown (int keycode) {
-        if(keycode == Input.Keys.W && keycode == Input.Keys.D)
-            controlo.heroFire(-45);
-        else  if(keycode == Input.Keys.W && keycode == Input.Keys.A)
-            controlo.heroFire(45);
-        else  if(keycode == Input.Keys.S && keycode == Input.Keys.D)
-            controlo.heroFire(135);
-        else  if(keycode == Input.Keys.S && keycode == Input.Keys.A)
-            controlo.heroFire(-135);
+
         if(keycode == Input.Keys.W)
-            controlo.heroFire(0);
-        else if(keycode == Input.Keys.S)
-            controlo.heroFire(180);
-       else if(keycode == Input.Keys.D)
-            controlo.heroFire(-90);
-       else  if(keycode == Input.Keys.A)
             controlo.heroFire(90);
-//            jogador.walkLeft();
-//        else if(keycode == Input.Keys.W)
-//            jogador.walkUp();
-//        else if(keycode == Input.Keys.D)
-//            jogador.walkRight();
-//        else if(keycode == Input.Keys.S)
-//            jogador.walkDown();
+        else if(keycode == Input.Keys.S)
+            controlo.heroFire(270);
+       else if(keycode == Input.Keys.D)
+            controlo.heroFire(0);
+       else  if(keycode == Input.Keys.A)
+            controlo.heroFire(180);
 
         return false;
     }
+
+
 
     public boolean keyUp (int keycode) {
         return false;

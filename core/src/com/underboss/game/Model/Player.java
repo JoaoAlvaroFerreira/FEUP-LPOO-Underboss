@@ -22,6 +22,13 @@ public class Player extends Character {
         this.angle = 0;
     }
 
+    public Player(int x, int y, int HP){
+        super(x, y, HP);
+        this.height = 78;
+        this.width = 48;
+        this.angle = 0;
+    }
+
     public Texture getPlayerImage(){
         return playerImage;
     }
@@ -33,6 +40,8 @@ public class Player extends Character {
     void setY(int y){
         this.y = y;
     }
+
+
 
     public void walkUp(){
         setY(this.getY() + 400 * Gdx.graphics.getDeltaTime());
@@ -49,6 +58,16 @@ public class Player extends Character {
     public void walkRight(){
         setX(this.getX() + 400 * Gdx.graphics.getDeltaTime());
     };
+
+    public Boolean minionDamage(Minion bicho){
+
+        if (bicho.overlaps(this)) {
+            this.loseHP();
+            this.loseHP();
+            return true;
+        }
+        return false;
+    }
 
 
 

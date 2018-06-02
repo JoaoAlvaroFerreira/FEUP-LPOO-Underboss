@@ -40,6 +40,7 @@ public class Ecra implements Screen {
     public Ecra(Underboss gam) {
         this.game = gam;
         this.manager = new GameManager();
+        manager.inputs().setCamera(this);
 
         preload();
 
@@ -55,10 +56,10 @@ public class Ecra implements Screen {
     }
     private void preload(){
 
-        bossOriginX = (int)manager.chefao.getWidth()/2;
-        bossOriginY = (int)manager.chefao.getHeight()/2;
-        playerOriginX = (int)manager.jogador.getWidth()/2;
-        playerOriginY = (int)manager.jogador.getHeight()/2;
+        bossOriginX = (int)manager.chefao.getWidth();
+        bossOriginY = (int)manager.chefao.getHeight();
+        playerOriginX = (int)manager.jogador.getWidth();
+        playerOriginY = (int)manager.jogador.getHeight();
         regiaoJogador = new TextureRegion(manager.jogador.getPlayerImage());
         regiaoChefe =  new TextureRegion(manager.chefao.getBossImage());
 
@@ -67,6 +68,9 @@ public class Ecra implements Screen {
         regiaoSword = new TextureRegion(swords);
     }
 
+    public OrthographicCamera getCamera() {
+        return camera;
+    }
 
     @Override
     public void render(float delta) {
@@ -101,10 +105,10 @@ public class Ecra implements Screen {
         playerOriginX = (int)manager.jogador.getWidth()/2;
         playerOriginY = (int)manager.jogador.getHeight()/2;
         if(manager.swordAttack())
-            game.batch.draw(regiaoSword, manager.chefao.getX(), manager.chefao.getY(), bossOriginX, bossOriginY, regiaoSword.getRegionWidth(), regiaoSword.getRegionHeight(), 1, 1,manager.chefao.getAngle());
+            game.batch.draw(regiaoSword, manager.chefao.getX(), manager.chefao.getY(), bossOriginX, bossOriginY, regiaoSword.getRegionWidth(), regiaoSword.getRegionHeight(), 1, 1,(float)manager.chefao.getAngle());
 
-        game.batch.draw(regiaoChefe, manager.chefao.getX(), manager.chefao.getY(), bossOriginX, bossOriginY, regiaoChefe.getRegionWidth(), regiaoChefe.getRegionHeight(), 1, 1,manager.chefao.getAngle());
-        game.batch.draw(regiaoJogador, manager.jogador.getX(), manager.jogador.getY(), playerOriginX, playerOriginY, regiaoJogador.getRegionWidth(), regiaoJogador.getRegionHeight(), 1, 1, manager.jogador.getAngle());
+        game.batch.draw(regiaoChefe, manager.chefao.getX(), manager.chefao.getY(), bossOriginX, bossOriginY, regiaoChefe.getRegionWidth(), regiaoChefe.getRegionHeight(), 1, 1,(float)manager.chefao.getAngle());
+        game.batch.draw(regiaoJogador, manager.jogador.getX(), manager.jogador.getY(), playerOriginX, playerOriginY, regiaoJogador.getRegionWidth(), regiaoJogador.getRegionHeight(), 1, 1, (float)manager.jogador.getAngle());
 
 
         drawProjectiles();
@@ -135,7 +139,7 @@ public class Ecra implements Screen {
             OriginX = (int) tiro.getWidth() / 2;
             OriginY = (int) tiro.getHeight() / 2;
             TextureRegion regiao = new TextureRegion(tiro.getImagem());
-            game.batch.draw(regiao, tiro.getX(), tiro.getY(), OriginX, OriginY, regiao.getRegionWidth(), regiao.getRegionHeight(), 1, 1, tiro.getAngle());
+            game.batch.draw(regiao, tiro.getX(), tiro.getY(), OriginX, OriginY, regiao.getRegionWidth(), regiao.getRegionHeight(), 1, 1,(float)tiro.getAngleDegrees());
         }
 
     }
@@ -146,9 +150,7 @@ public class Ecra implements Screen {
 
     @Override
     public void show() {
-        // start the playback of the background music
-        // when the screen is shown
-       // rainMusic.play();
+
     }
 
     @Override
@@ -165,11 +167,7 @@ public class Ecra implements Screen {
 
     @Override
     public void dispose() {
-      //tiroBoss.dispose();
-        //dropImage.dispose();
-       // bucketImage.dispose();
-       // dropSound.dispose();
-        //rainMusic.dispose();
+
     }
 
 }

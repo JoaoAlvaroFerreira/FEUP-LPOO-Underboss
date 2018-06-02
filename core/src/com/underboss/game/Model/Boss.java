@@ -14,22 +14,38 @@ public class Boss extends Character {
     double changeDirectionTimer = 0;
     int nextX, nextY, speed;
     float tempX, tempY;
-
+    double fireFrequency;
+    int fireSpeed;
 
     public Boss() {
         super();
-        angle = 0;
+        initVariables();
     }
 
     public Boss(int x, int y) {
         super(x, y);
-        angle = 0;
+        initVariables();
     }
+    public Boss(int x, int y, int HP) {
+        super(x, y, HP);
+       initVariables();
+    }
+
+    private void initVariables(){
+        angle = 0;
+        fireFrequency = 2000000000;
+        fireSpeed = 100;
+        this.setWidth(100);
+        this.setHeight(100);
+    }
+
 
     public Texture getBossImage() {
         return bossImage;
     }
 
+
+    public double getFireFrequency(){ return fireFrequency;   }
 
     void setX(int x) {
         this.x = x;
@@ -65,35 +81,57 @@ public class Boss extends Character {
 
     }
 
+    public void doubleFire(){ fireFrequency = fireFrequency/2;
+    fireSpeed = 2*fireSpeed;}
+
+    public int getFireSpeed() {
+        return fireSpeed;
+    }
+
     public void angleChange(Player jogador) {
 
 
-        if (this.getX() - jogador.getX() > Math.abs(20) && this.getY() - jogador.getY() > Math.abs(20)) {
-            if (this.getX() <= jogador.getX() && this.getY() <= jogador.getY()) //Q1
-            {
-                // this.angle = auxCalc(jogador);
-                angle = 135;
+//        if (this.getX() - jogador.getX() > Math.abs(20) && this.getY() - jogador.getY() > Math.abs(20)) {
+           if (this.getX() <= jogador.getX() && this.getY() <= jogador.getY())
+               angle = auxCalc(jogador); //Q1
+//            {
+//                // this.angle = auxCalc(jogador);
+//                angle = 135;
+//
+               //
+                else if (this.getX() <= jogador.getX() && this.getY() > jogador.getY())
+               angle = auxCalc(jogador);//2
+//            {
+//                // this.angle = auxCalc(jogador) + 90;
+//                angle = 45;
+//
+        else if (this.getX() > jogador.getX() && this.getY() > jogador.getY()) //ESTÁ A DAR
+               angle = auxCalc(jogador) + 180;//Q3
+//            {
+//                //this.angle = auxCalc(jogador) + 180;
+//                angle = 315;
+//
+        else if (this.getX() > jogador.getX() && this.getY() <= jogador.getY())
+                angle = auxCalc(jogador) + 180;//Q4
+//            {
+//                // this.angle = auxCalc(jogador) - 90;
+//                angle = 225;
+//            }
 
-            } else if (this.getX() <= jogador.getX() && this.getY() > jogador.getY())//Q4
-            {
-                // this.angle = auxCalc(jogador) + 90;
-                angle = 45;
+        //parte que funciona
+//        if(Math.abs(this.getX() - jogador.getX()) > Math.abs(this.getY() - jogador.getY())){
+//            if (this.getY() - jogador.getY() >= 0)
+//                angle = 180;
+//
+//            else angle = 0;
+//        }
+//        else {
+//            if (this.getX() - jogador.getX() >= 0)
+//                angle = 90;
+//
+//            else angle = 270;
+//        }
 
-            } else if (this.getX() > jogador.getX() && this.getY() > jogador.getY()) //Q3
-            {
-                //this.angle = auxCalc(jogador) + 180;
-                angle = 315;
-
-            } else if (this.getX() > jogador.getX() && this.getY() <= jogador.getY()) //Q2
-            {
-                // this.angle = auxCalc(jogador) - 90;
-                angle = 225;
-            }
-        } else if (this.getY() - jogador.getY() > 0)
-            angle = 0;
-
-            else if(this.getY() - jogador.getY() < 0)
-                angle = 180;
 
 
 }
@@ -102,13 +140,16 @@ public class Boss extends Character {
         float auxX, auxY;
         auxX = jogador.getX() - getX();
         auxY = jogador.getY() - getY();
-        return (float)Math.tanh(auxY/auxX);
+        return (float)Math.toDegrees(Math.tanh(auxY/auxX));
 
     }
 
     public Boolean tooClose(Player jogador){
 
-        return Math.sqrt(Math.pow(this.getX() - jogador.getX(),2) + Math.pow(this.getY() - jogador.getY(),2)) < 180;
+        return Math.sqrt(Math.pow(this.getX() - jogador.getX(),2) + Math.pow(this.getY() - jogador.getY(),2)) < 100;
 
     }
+
+
+
 }

@@ -11,7 +11,7 @@ public abstract class Character extends Rectangle {
 
     int HP;
     int maxHP;
-    float angle;
+    double angle;
     int estadoAtual;
     String[] estados;
 
@@ -21,7 +21,7 @@ public abstract class Character extends Rectangle {
         y = 400;
         setWidth(50);
         setHeight(80);
-        angle = 90;
+        angle = 0;
         initEstados();
 
     }
@@ -29,20 +29,28 @@ public abstract class Character extends Rectangle {
     Character(int xpos, int ypos){
         x = xpos;
         y = ypos;
-        angle = 90;
+        angle = 0;
         initEstados();
 
 
     }
 
-    Character(int xpos, int ypos, int estadoAtual){
+    Character(int xpos, int ypos, int HP){
         x = xpos;
         y = ypos;
+        this.HP = HP;
+        this.maxHP = HP;
+        angle = 0;
         initEstados();
-        this.estadoAtual = estadoAtual;
+
+
     }
 
 
+
+    public void setAngle(double novoAngulo){
+        this.angle = novoAngulo;
+    }
 
     private void initEstados(){
         String[] estados = {"Healthy", "Poisoned", "Dying", "Dead", "Invincible"};
@@ -73,6 +81,18 @@ public abstract class Character extends Rectangle {
         this.HP = HP;
     }
 
-    public float getAngle() {return angle;}
+    public double getAngle() {return angle;}
+
+    public Boolean bulletDamage(Projectile tiro){
+        if (tiro.overlaps(this)) {
+            this.loseHP();
+            return true;
+        }
+        return false;
+    }
+
+    public String getState(){
+        return estados[estadoAtual];
+    }
 
 }

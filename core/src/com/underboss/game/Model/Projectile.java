@@ -10,30 +10,31 @@ public class Projectile extends Rectangle {
     int speed;
     int direction; //0-360, começando em apontando para cima
     int acceleration;
+    float angle;
 
     Texture imagem;
-    Texture tiroHero;
-    Texture tiroBoss;
+    Texture tiroBoss = new Texture(Gdx.files.internal("bossShot1.png"));
+    Texture tiroHero = new Texture(Gdx.files.internal("heroShot1.png"));
 
-    public Projectile(Character personagem, int nSpeed, int nDirection, int nAcceleration, float width, float height){
+    public Projectile(Character personagem, int nSpeed, int nDirection, float angle, float width, float height){
     disparou = personagem;
     x = personagem.getX();
     y = personagem.getY();
     speed = nSpeed;
     direction = nDirection;
-    acceleration = nAcceleration;
+    this.angle = angle;
     this.width = width;
     this.height = height;
 
-    tiroBoss = new Texture(Gdx.files.internal("bossShot1.png"));
-    tiroHero = new Texture(Gdx.files.internal("heroShot1.png"));
     }
 
-    public Projectile(Character personagem, int xPos, int yPos, int nSpeed, int nDirection, int nAcceleration, float width, float height){
+    public Projectile(Character personagem, int nSpeed, int nDirection, float width, float height){
         disparou = personagem;
+        x = personagem.getX();
+        y = personagem.getY();
         speed = nSpeed;
+        angle = personagem.getAngle();
         direction = nDirection;
-        acceleration = nAcceleration;
         this.width = width;
         this.height = height;
     }
@@ -42,6 +43,10 @@ public class Projectile extends Rectangle {
     {
         imagem = img;
     }
+
+    public void setAngle(float angle){ this.angle = angle;};
+
+    public float getAngle(){return angle;}
 
     public void setBossTiro(){
         imagem = tiroBoss;
@@ -58,4 +63,5 @@ public class Projectile extends Rectangle {
     public Character getDisparou() {
         return disparou;
     }
+
 }

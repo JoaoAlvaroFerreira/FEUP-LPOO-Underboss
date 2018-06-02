@@ -11,6 +11,7 @@ public class AndroidLauncher extends AndroidApplication {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		config.useAccelerometer = false;
+		config.useGyroscope = true;
 		config.useCompass = false;
 		initialize(new Underboss(), config);
 	}

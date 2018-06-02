@@ -12,12 +12,14 @@ public class Player extends Character {
         super();
         this.height = 78;
         this.width = 48;
+        this.angle = 0;
     }
 
     public Player(int x, int y){
         super(x, y);
         this.height = 78;
         this.width = 48;
+        this.angle = 0;
     }
 
     public Texture getPlayerImage(){

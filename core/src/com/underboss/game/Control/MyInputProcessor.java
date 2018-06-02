@@ -39,6 +39,9 @@ public class MyInputProcessor implements InputProcessor {
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
             jogador.walkDown();
 
+        if(Gdx.input.getGyroscopeX() != 0)
+       controlo.heroFire(0);
+
 //        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)){
 //            jogador();
 //        }
@@ -46,8 +49,22 @@ public class MyInputProcessor implements InputProcessor {
     }
 
     public boolean keyDown (int keycode) {
+        if(keycode == Input.Keys.W && keycode == Input.Keys.D)
+            controlo.heroFire(-45);
+        else  if(keycode == Input.Keys.W && keycode == Input.Keys.A)
+            controlo.heroFire(45);
+        else  if(keycode == Input.Keys.S && keycode == Input.Keys.D)
+            controlo.heroFire(135);
+        else  if(keycode == Input.Keys.S && keycode == Input.Keys.A)
+            controlo.heroFire(-135);
         if(keycode == Input.Keys.W)
-            controlo.heroFire();
+            controlo.heroFire(0);
+        else if(keycode == Input.Keys.S)
+            controlo.heroFire(180);
+       else if(keycode == Input.Keys.D)
+            controlo.heroFire(-90);
+       else  if(keycode == Input.Keys.A)
+            controlo.heroFire(90);
 //            jogador.walkLeft();
 //        else if(keycode == Input.Keys.W)
 //            jogador.walkUp();

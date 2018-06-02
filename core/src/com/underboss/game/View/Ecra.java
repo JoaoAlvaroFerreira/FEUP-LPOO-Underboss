@@ -22,8 +22,17 @@ public class Ecra implements Screen {
     private GameManager manager;
     private int OriginX;
     private int OriginY;
+    private int bossOriginX;
+    private int bossOriginY;
+    private int playerOriginX;
+    private int playerOriginY;
+    private TextureRegion regiaoChefe;
+    private TextureRegion regiaoJogador;
+    private TextureRegion regiaoSword;
+
 
     Texture room;
+    Texture swords;
 
     OrthographicCamera camera;
 
@@ -32,7 +41,7 @@ public class Ecra implements Screen {
         this.game = gam;
         this.manager = new GameManager();
 
-        loadTextures();
+        preload();
 
         initCamera();
 
@@ -44,9 +53,18 @@ public class Ecra implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
     }
-    private void loadTextures(){
+    private void preload(){
+
+        bossOriginX = (int)manager.chefao.getWidth()/2;
+        bossOriginY = (int)manager.chefao.getHeight()/2;
+        playerOriginX = (int)manager.jogador.getWidth()/2;
+        playerOriginY = (int)manager.jogador.getHeight()/2;
+        regiaoJogador = new TextureRegion(manager.jogador.getPlayerImage());
+        regiaoChefe =  new TextureRegion(manager.chefao.getBossImage());
 
         room = new Texture(Gdx.files.internal("roomtemp.png"));
+        swords = new Texture(Gdx.files.internal("swords.png"));
+        regiaoSword = new TextureRegion(swords);
     }
 
 
@@ -75,8 +93,18 @@ public class Ecra implements Screen {
         game.font.draw(game.batch, "HP do Boss: " + manager.chefao.getHP(), 0, 480);
         game.font.draw(game.batch, "HP do Heroi: " + manager.jogador.getHP(), 0, 40);
 
-        game.batch.draw(manager.jogador.getPlayerImage(), manager.jogador.getX(), manager.jogador.getY());
-        game.batch.draw(manager.chefao.getBossImage(), manager.chefao.getX(), manager.chefao.getY());
+       // game.batch.draw(manager.jogador.getPlayerImage(), manager.jogador.getX(), manager.jogador.getY());
+
+
+        bossOriginX = (int)manager.chefao.getWidth()/2;
+        bossOriginY = (int)manager.chefao.getHeight()/2;
+        playerOriginX = (int)manager.jogador.getWidth()/2;
+        playerOriginY = (int)manager.jogador.getHeight()/2;
+        if(manager.swordAttack())
+            game.batch.draw(regiaoSword, manager.chefao.getX(), manager.chefao.getY(), bossOriginX, bossOriginY, regiaoSword.getRegionWidth(), regiaoSword.getRegionHeight(), 1, 1,manager.chefao.getAngle());
+
+        game.batch.draw(regiaoChefe, manager.chefao.getX(), manager.chefao.getY(), bossOriginX, bossOriginY, regiaoChefe.getRegionWidth(), regiaoChefe.getRegionHeight(), 1, 1,manager.chefao.getAngle());
+        game.batch.draw(regiaoJogador, manager.jogador.getX(), manager.jogador.getY(), playerOriginX, playerOriginY, regiaoJogador.getRegionWidth(), regiaoJogador.getRegionHeight(), 1, 1, manager.jogador.getAngle());
 
 
         drawProjectiles();
@@ -92,9 +120,6 @@ public class Ecra implements Screen {
 
     public void drawProjectiles(){
 
-
-
-
        drawIndividualProjectiles(manager.bossBullets);
        drawIndividualProjectiles(manager.heroBullets);
     }
@@ -106,10 +131,11 @@ public class Ecra implements Screen {
            if(tiro.getHeight() < 0)
               balas.removeValue(tiro, true);
 
+
             OriginX = (int) tiro.getWidth() / 2;
             OriginY = (int) tiro.getHeight() / 2;
             TextureRegion regiao = new TextureRegion(tiro.getImagem());
-            game.batch.draw(regiao, tiro.getX(), tiro.getY(), OriginX, OriginY, regiao.getRegionWidth(), regiao.getRegionHeight(), 1, 1, tiro.getDisparou().getAngle());
+            game.batch.draw(regiao, tiro.getX(), tiro.getY(), OriginX, OriginY, regiao.getRegionWidth(), regiao.getRegionHeight(), 1, 1, tiro.getAngle());
         }
 
     }

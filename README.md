@@ -43,15 +43,15 @@ I ended up only meeting the last two goals – and despite doing a good job at t
 
 ##**User Manual**
 
-## **How to run the development environment**
+ **How to run the development environment**
 
 - Set up Android Studio with an Android Emulator;
 - Import the project into Android Studio;
 - Unload the HTML module (you can do this by right clicking on the project &gt; Load/Unload Modules);
-- Go to Run&gt;Edit Configurations and make sure that the working directory of the DesktopLauncher is &quot;…\Underboss\android\assets&quot; (the first part of the url being the place where you pull the project to);
+- Go to Run&gt;Edit Configurations and make sure that the working directory of the DesktopLauncher is &quot;…\android\assets&quot; ;
 - With all of this done, you should be able to run the project with both Android and the DesktopLauncher run options.
 
-## **How to run the testing units**
+ **How to run the testing units**
 
 - Open each class individually, hover your pointer over the name of each class and press &quot;Alt + Enter&quot;, which will prompt you to run a test of that class;
 - Alternatively, go to Run&gt;Edit Configurations and Add Configuration (the plus sign in the corner) and make sure the Test Kind is class, &quot;Use classpath of module&quot; has core selected, and the classes are &quot;com.underboss.Test.&quot; and then each class one by one.
@@ -71,16 +71,19 @@ I ended up only meeting the last two goals – and despite doing a good job at t
 
 **Intro screen**
 
+!(altText)[https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/master/android/assets/initScreen.PNG?raw=true]
 - As soon as you open the game, you&#39;ll be greeted by an intro screen.
 - Tap or click to go forward.
 
 **Tutorial screen**
 
+!(altText)[https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/master/android/assets/tutorialScreen.PNG?raw=true]
 - This screen gives you the instructions on how to play the game.
 - Tap or click to go forward.
 
 **In-Game**
 
+!(altText)[https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/InGamePrint.PNG?raw=true]
 - Two indicators to show boss and player health, along with status.
 - The player can shoot his laser beam and walk in four directions, as was indicated in the tutorial screen.
 - The boss has multiple types of attacks: he can summon minions to chase the player, throw energy blasts that will aim at the player&#39;s position at the time that it was fired, and will attack the player with a lightsaber if the player gets too close (or if he gets too close to the player).
@@ -90,5 +93,9 @@ I ended up only meeting the last two goals – and despite doing a good job at t
 
 **Ending Screen**
 
+
+!(altText)[https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/master/android/assets/winScreen.PNG?raw=true]
+
+!(altText)[https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/master/android/assets/loseScreen.PNG?raw=true]
 - Depending on who dies first, the player might get a Victory or Defeat screen.
 - Either way, the player can tap again to go back to the intro screen and start all over again.

@@ -48,24 +48,24 @@ public class MyInputProcessor implements InputProcessor {
 
 
 
-            if(Gdx.input.getGyroscopeX() > 0.5)
+            if(Gdx.input.getGyroscopeX() > 3)
                 controlo.heroFire(0);
-            if(Gdx.input.getGyroscopeX() < -0.5)
+            if(Gdx.input.getGyroscopeX() < -3)
                 controlo.heroFire(180);
-            if(Gdx.input.getGyroscopeY() > 0.5)
+            if(Gdx.input.getGyroscopeY() > 3)
                 controlo.heroFire(90);
-            if(Gdx.input.getGyroscopeY() < -0.5)
+            if(Gdx.input.getGyroscopeY() < -3)
                 controlo.heroFire(270);
 
 
-        if(Gdx.input.getAccelerometerX() > 5)
-            controlo.heroFire(0);
-        if(Gdx.input.getAccelerometerX() < -5)
-            controlo.heroFire(180);
-        if(Gdx.input.getAccelerometerY() > 5)
-            controlo.heroFire(90);
-        if(Gdx.input.getAccelerometerY() < -5)
-            controlo.heroFire(270);
+//        if(Gdx.input.getAccelerometerY() > 3)
+//            controlo.heroFire(0);
+//        if(Gdx.input.getAccelerometerY() < -3)
+//            controlo.heroFire(180);
+//        if(Gdx.input.getAccelerometerZ() > 3)
+//            controlo.heroFire(90);
+//        if(Gdx.input.getAccelerometerZ() < -3)
+//            controlo.heroFire(270);
 
 
 //        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)){
@@ -84,6 +84,8 @@ public class MyInputProcessor implements InputProcessor {
             controlo.heroFire(0);
        else  if(keycode == Input.Keys.A)
             controlo.heroFire(180);
+
+
 
         return false;
     }

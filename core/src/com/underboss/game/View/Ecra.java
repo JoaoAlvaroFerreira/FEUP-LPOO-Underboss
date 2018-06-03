@@ -34,6 +34,7 @@ public class Ecra implements Screen {
 
     Texture room;
     Texture swords;
+    Texture poison;
 
     OrthographicCamera camera;
 
@@ -66,6 +67,7 @@ public class Ecra implements Screen {
 
         room = new Texture(Gdx.files.internal("roomtemp.png"));
         swords = new Texture(Gdx.files.internal("swords.png"));
+        poison = new Texture(Gdx.files.internal("poisoned.png"));
         regiaoSword = new TextureRegion(swords);
     }
 
@@ -95,8 +97,8 @@ public class Ecra implements Screen {
 
         game.batch.draw(room, 0, 0);
 
-        game.font.draw(game.batch, " Boss State: " + manager.chefao.getState() + "Boss HP: " + manager.chefao.getHP(), 0, 480);
-        game.font.draw(game.batch, " Your State: " +  manager.jogador.getState() + "Your HP: " + manager.jogador.getHP() , 0, 40);
+        game.font.draw(game.batch, "Boss State: " + manager.chefao.getState() + "    Boss HP: " + manager.chefao.getHP(), 0, 480);
+        game.font.draw(game.batch, "Your State: " +  manager.jogador.getState() + "    Your HP: " + manager.jogador.getHP() , 0, 40);
 
        // game.batch.draw(manager.jogador.getPlayerImage(), manager.jogador.getX(), manager.jogador.getY());
 
@@ -111,6 +113,8 @@ public class Ecra implements Screen {
         game.batch.draw(regiaoChefe, manager.chefao.getX(), manager.chefao.getY(), bossOriginX, bossOriginY, regiaoChefe.getRegionWidth(), regiaoChefe.getRegionHeight(), 1, 1,(float)manager.chefao.getAngle());
         game.batch.draw(regiaoJogador, manager.jogador.getX(), manager.jogador.getY(), playerOriginX, playerOriginY, regiaoJogador.getRegionWidth(), regiaoJogador.getRegionHeight(), 1, 1, (float)manager.jogador.getAngle());
 
+        if(manager.jogador.getState() == "Poisoned")
+        game.batch.draw(poison, manager.jogador.getX()-10, manager.jogador.getY());
 
         drawProjectiles();
         drawMinions();

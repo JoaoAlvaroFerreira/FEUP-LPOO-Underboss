@@ -3,12 +3,14 @@ package com.underboss.game.Model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.underboss.game.Control.MyInputProcessor;
 
 
 public class Player extends Character {
 
     float TimeSinceHit;
     float SafetyTime;
+    MyInputProcessor vibra;
     Texture playerImage = new Texture(Gdx.files.internal("Shooter1.png"));
 
     public Player(){
@@ -67,7 +69,10 @@ public class Player extends Character {
     public Boolean minionDamage(Minion bicho){
 
         if (bicho.overlaps(this)) {
-            this.loseHP();
+
+            if(getState() == "Healthy")
+            this.setHP(getHP() - 1);
+
             this.loseHP();
             return true;
         }
@@ -95,7 +100,9 @@ public class Player extends Character {
         if(getState() != "Invincible") {
             if (HP > 0) {
                 setHP(getHP() - 1);
-                Gdx.input.vibrate(1000);
+               Gdx.input.vibrate(250);
+
+               if(HP > 1)
                 makePlayerInvincible();
             }
         }
@@ -106,6 +113,8 @@ public class Player extends Character {
     @Override
     public void checkState() {
 
+        if(TimeUtils.nanoTime() - TimeSinceHit > SafetyTime)
+            makePlayerNormal();
 
         if(getState() != "Invincible") {
 
@@ -115,8 +124,7 @@ public class Player extends Character {
                 estadoAtual = 3;
         }
 
-        if(TimeUtils.nanoTime() - TimeSinceHit > SafetyTime)
-         makePlayerNormal();
+
 
         poisonTick();
     }

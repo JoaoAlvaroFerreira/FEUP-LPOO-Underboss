@@ -41,7 +41,7 @@ public class GameManager {
         jogador.setAngle(90);
 
 
-        chefao = new Boss(800 / 2 -  78 / 2, 380, 30);
+        chefao = new Boss(800 / 2 -  78 / 2, 380, 70);
         chefao.setAngle(270);
 
 
@@ -64,11 +64,11 @@ public class GameManager {
 
 
 
-       // chefao.move(delta);
-        // timeMinions();
-        // timeFire();
-        // minionIterator();
-        // bossFireIterator();
+        chefao.move(delta);
+         timeMinions();
+         timeFire();
+         minionIterator();
+         bossFireIterator();
         chefao.angleChange(jogador);
         chefao.checkState();
         jogador.checkState();
@@ -119,7 +119,7 @@ public class GameManager {
     private void timeMinions() {
 
 
-            if (TimeUtils.nanoTime() - lastMinionTime > chefao.getFireFrequency() * 3) {
+            if (TimeUtils.nanoTime() - lastMinionTime > chefao.getFireFrequency() * 2) {
                 generateMinions();
                 lastMinionTime = TimeUtils.nanoTime();
             }

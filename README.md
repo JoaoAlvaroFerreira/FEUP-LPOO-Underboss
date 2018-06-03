@@ -1,6 +1,7 @@
 ## Underboss
 
 Project by João Álvaro Ferreira, [up201605592@fe.up.pt](mailto:up201605592@fe.up.pt) – MIEIC FEUP
+JavaDoc for this project is hosted at https://joaoalvaroferreira.github.io/LPOO-Underboss/
 
 
 

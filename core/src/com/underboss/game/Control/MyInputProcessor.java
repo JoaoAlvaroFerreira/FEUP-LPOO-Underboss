@@ -58,19 +58,14 @@ public class MyInputProcessor implements InputProcessor {
                 controlo.heroFire(270);
 
 
-        if(Gdx.input.getAccelerometerY() > 5)
+        if(Gdx.input.getAccelerometerY() > 4)
             controlo.heroFire(0);
-        if(Gdx.input.getAccelerometerY() < -5)
+        if(Gdx.input.getAccelerometerY() < -4)
             controlo.heroFire(180);
-        if(Gdx.input.getAccelerometerZ() > 5)
+        if(Gdx.input.getAccelerometerZ() > 4)
             controlo.heroFire(90);
-        if(Gdx.input.getAccelerometerZ() < -5)
+        if(Gdx.input.getAccelerometerZ() < -4)
             controlo.heroFire(270);
-
-
-//        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)){
-//            jogador();
-//        }
 
     }
 

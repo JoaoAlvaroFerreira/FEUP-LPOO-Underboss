@@ -57,6 +57,11 @@ public class EndScreen implements Screen {
         }
 
 
+        if (Gdx.input.justTouched()) {
+
+            game.setScreen(new Overworld(game));
+
+        }
     }
 
 

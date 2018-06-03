@@ -49,6 +49,18 @@ public abstract class Character extends Rectangle {
     }
 
 
+    public void recalibrate(){
+
+        if (this.getX() < 0)
+            this.setX(0);
+        if (this.getX() > 800 - 48)
+            this.setX(800- 48);
+        if (this.getY() < 0)
+            this.setY(0);
+        if (this.getY() > 480 - 78)
+            this.setY(480-78);
+
+    }
 
     public void setAngle(double novoAngulo){
         this.angle = novoAngulo;
@@ -75,8 +87,6 @@ public abstract class Character extends Rectangle {
     }
 
     public void checkState() {
-
-
 
         if(HP <= maxHP/3)
             estadoAtual = 2;
@@ -112,9 +122,10 @@ public abstract class Character extends Rectangle {
         this.estadoAtual = i;
     }
 
-    protected void poisonTick(){
+    public void poisonTick(){
         if(getState() == "Poisoned")
-            setHP(getHP() - Gdx.graphics.getDeltaTime()/3);
+            setHP(getHP() - Gdx.graphics.getDeltaTime() / 3);
+
 
     }
 

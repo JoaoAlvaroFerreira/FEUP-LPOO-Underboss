@@ -36,14 +36,16 @@ public class Ecra implements Screen {
     Texture swords;
     Texture poison;
 
+
+
     OrthographicCamera camera;
 
 
     public Ecra(Underboss gam) {
         this.game = gam;
         this.manager = new GameManager();
-        manager.inputs().setCamera(this);
         preload();
+        manager.inputs().setCamera(this);
         gam.setManager(manager);
 
         initCamera();
@@ -68,6 +70,8 @@ public class Ecra implements Screen {
         room = new Texture(Gdx.files.internal("roomtemp.png"));
         swords = new Texture(Gdx.files.internal("swords.png"));
         poison = new Texture(Gdx.files.internal("poisoned.png"));
+
+
         regiaoSword = new TextureRegion(swords);
     }
 

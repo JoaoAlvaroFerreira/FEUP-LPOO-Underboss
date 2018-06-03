@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class Boss extends Character {
 
-    Texture bossImage = new Texture(Gdx.files.internal("Boss1.png"));
+    Texture bossImage;
     double changeDirectionTimer = 0;
     int nextX, nextY, speed;
     float tempX, tempY;
@@ -44,6 +44,10 @@ public class Boss extends Character {
 
     public Texture getBossImage() {
         return bossImage;
+    }
+
+    public void setTexture(Texture textura){
+        bossImage = textura;
     }
 
 

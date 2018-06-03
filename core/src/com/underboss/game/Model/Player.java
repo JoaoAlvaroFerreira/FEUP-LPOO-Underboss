@@ -11,7 +11,7 @@ public class Player extends Character {
     float TimeSinceHit;
     float SafetyTime;
     MyInputProcessor vibra;
-    Texture playerImage = new Texture(Gdx.files.internal("Shooter1.png"));
+    Texture playerImage;
 
     public Player(){
         super();
@@ -38,6 +38,10 @@ public class Player extends Character {
     }
     public Texture getPlayerImage(){
         return playerImage;
+    }
+
+    public void setTexture(Texture textura){
+        playerImage = textura;
     }
 
     void setX(int x){
@@ -71,9 +75,10 @@ public class Player extends Character {
         if (bicho.overlaps(this)) {
 
             if(getState() == "Healthy")
-            this.setHP(getHP() - 1);
+            setHP(getHP() - 1);
 
-            this.loseHP();
+
+            loseHP();
             return true;
         }
         return false;
@@ -113,7 +118,7 @@ public class Player extends Character {
     @Override
     public void checkState() {
 
-        if(TimeUtils.nanoTime() - TimeSinceHit > SafetyTime)
+        if(TimeUtils.nanoTime() - TimeSinceHit > SafetyTime && getState() != "Poisoned")
             makePlayerNormal();
 
         if(getState() != "Invincible") {

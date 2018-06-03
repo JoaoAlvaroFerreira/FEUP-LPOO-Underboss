@@ -14,9 +14,11 @@ public class Projectile extends Rectangle {
     Boolean poison;
 
     Texture imagem;
-    Texture tiroBoss = new Texture(Gdx.files.internal("bossShot1.png"));
-    Texture tiroHero = new Texture(Gdx.files.internal("heroShot1.png"));
-    Texture tiroBoss2 = new Texture(Gdx.files.internal("bossShot2.png"));
+    Texture tiroBoss;
+    Texture tiroHero;
+    Texture tiroBoss2;
+
+    public Projectile(){};
 
     public Projectile(Character personagem, int nSpeed, float angle, float width, float height){
     disparou = personagem;
@@ -53,10 +55,13 @@ public class Projectile extends Rectangle {
 
     }
 
-    public void setAngle(float angle){ this.angle = angle;
+    public void setTiroBoss(Texture img){ tiroBoss = img;}
 
+    public void setTiroBoss2(Texture img){ tiroBoss2 = img;}
 
-    };
+    public void setTiroHero(Texture img){ tiroHero = img;}
+
+    public void setAngle(float angle){ this.angle = angle; };
 
     public double getAngle(){return Math.toRadians(angle);}
 
@@ -84,4 +89,11 @@ public class Projectile extends Rectangle {
 
     public boolean getPoison(){ return poison; }
 
+    public Boolean outofbounds()
+    {
+        if (this.getX() < 0 || this.getX() > 800 || this.getY() < 0 || this.getY() > 480)
+            return true;
+
+        return false;
+    }
 }

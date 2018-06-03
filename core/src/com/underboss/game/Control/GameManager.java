@@ -1,6 +1,7 @@
 package com.underboss.game.Control;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.underboss.game.Model.Boss;
@@ -28,6 +29,14 @@ public class GameManager {
     long lastHeroShotTime;
     int gameEnd;
 
+    Texture tiroBoss;
+    Texture tiroHero;
+    Texture tiroBoss2;
+    Texture playerImage;
+    Texture bossImage;
+    Texture minionImage;
+
+
 
 
     public GameManager(){
@@ -41,7 +50,7 @@ public class GameManager {
         jogador.setAngle(90);
 
 
-        chefao = new Boss(800 / 2 -  78 / 2, 380, 70);
+        chefao = new Boss(800 / 2 -  78 / 2, 380, 40);
         chefao.setAngle(270);
 
 
@@ -57,7 +66,21 @@ public class GameManager {
         inputs = new MyInputProcessor(jogador);
         Gdx.input.setInputProcessor(inputs);
         inputs.setControlo(instance);
+        loadTextures();
     }
+
+    private void loadTextures(){
+
+        tiroBoss = new Texture(Gdx.files.internal("bossShot1.png"));
+        tiroHero = new Texture(Gdx.files.internal("heroShot1.png"));
+        tiroBoss2 = new Texture(Gdx.files.internal("bossShot2.png"));
+        playerImage = new Texture(Gdx.files.internal("Shooter1.png"));
+        jogador.setTexture(playerImage);
+        bossImage = new Texture(Gdx.files.internal("Boss1.png"));
+        chefao.setTexture(bossImage);
+        minionImage = new Texture(Gdx.files.internal("minion1.png"));
+    }
+
 
     public void logic(float delta){
 
@@ -73,8 +96,8 @@ public class GameManager {
         chefao.checkState();
         jogador.checkState();
         heroFireIterator();
-        recalibrate(jogador);
-        recalibrate(chefao);
+        jogador.recalibrate();
+        chefao.recalibrate();
 
         if(chefao.getState() == "Dead")
             winGame();
@@ -91,18 +114,7 @@ public class GameManager {
         return instance;
     }
 
-    public void recalibrate(Character obj){
 
-        if (obj.getX() < 0)
-            obj.setX(0);
-        if (obj.getX() > 800 - 48)
-            obj.setX(800- 48);
-        if (obj.getY() < 0)
-            obj.setY(0);
-        if (obj.getY() > 480 - 78)
-            obj.setY(480-78);
-
-    }
     public static MyInputProcessor inputs(){
 
         return inputs;
@@ -125,11 +137,13 @@ public class GameManager {
             }
 
     }
+
     public void bossFire() {
         Projectile tiro = new Projectile(chefao, chefao.getFireSpeed(), (float)chefao.getAngle(), 70, 80 );
+        tiro.setTiroBoss(tiroBoss);
+        tiro.setTiroBoss2(tiroBoss2);
         tiro.setBossTiro();
         bossBullets.add(tiro);
-
         lastShotTime = TimeUtils.nanoTime();
     }
 
@@ -137,7 +151,8 @@ public class GameManager {
 
         if (TimeUtils.nanoTime() - lastHeroShotTime > chefao.getFireFrequency() / 10) {
             jogador.setAngle(angle);
-            Projectile tiro = new Projectile(jogador, 300, angle, 40, 30);
+            Projectile tiro = new Projectile(jogador, 300, angle, 50, 70);
+            tiro.setTiroHero(tiroHero);
             tiro.setHeroTiro();
             heroBullets.add(tiro);
             lastHeroShotTime = TimeUtils.nanoTime();
@@ -146,6 +161,7 @@ public class GameManager {
 
     public void generateMinions(){
         Minion bicho = new Minion(chefao);
+        bicho.setTexture(minionImage);
         minions.add(bicho);
     }
 
@@ -156,7 +172,7 @@ public class GameManager {
             Projectile tiro = iter.next();
             tiro.setY((float)(tiro.getY() +  tiro.getSpeed() * Math.sin(tiro.getAngle()) * Gdx.graphics.getDeltaTime()));
             tiro.setX((float)(tiro.getX() +  tiro.getSpeed() * Math.cos(tiro.getAngle()) * Gdx.graphics.getDeltaTime()));
-            if (outofbounds(tiro) || jogador.bulletDamage(tiro))
+            if (tiro.outofbounds() || jogador.bulletDamage(tiro))
                 iter.remove();
 
             if(chefao.overlaps(jogador)){
@@ -175,7 +191,7 @@ public class GameManager {
             Projectile tiro = iterNovo.next();
             tiro.setY((float)(tiro.getY() +  tiro.getSpeed() * Math.sin(tiro.getAngle()) * Gdx.graphics.getDeltaTime()));
             tiro.setX((float)(tiro.getX() +  tiro.getSpeed() * Math.cos(tiro.getAngle()) * Gdx.graphics.getDeltaTime()));
-            if (outofbounds(tiro) || chefao.bulletDamage(tiro))
+            if (tiro.outofbounds() || chefao.bulletDamage(tiro))
                 iterNovo.remove();
 
 
@@ -194,7 +210,7 @@ public class GameManager {
         while (iterMinion.hasNext()) {
             Minion bicho = iterMinion.next();
             bicho.move(jogador);
-            if(jogador.minionDamage(bicho) || outofbounds(bicho))
+            if(jogador.minionDamage(bicho) || bicho.outofbounds())
                 iterMinion.remove();
         }
 
@@ -212,13 +228,7 @@ public class GameManager {
 
 
 
-    private Boolean outofbounds(com.badlogic.gdx.math.Rectangle obj)
-    {
-      if (obj.getX() < 0 || obj.getX() > 800 || obj.getY() < 0 || obj.getY() > 480)
-          return true;
 
-      return false;
-    }
 
     private void winGame(){
         gameEnd = 1;

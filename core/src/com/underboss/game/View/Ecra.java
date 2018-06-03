@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.underboss.game.Control.GameManager;
+import com.underboss.game.Model.Minion;
 import com.underboss.game.Model.Projectile;
 import com.underboss.game.Underboss;
 
@@ -41,8 +42,8 @@ public class Ecra implements Screen {
         this.game = gam;
         this.manager = new GameManager();
         manager.inputs().setCamera(this);
-
         preload();
+        gam.setManager(manager);
 
         initCamera();
 
@@ -94,8 +95,8 @@ public class Ecra implements Screen {
 
         game.batch.draw(room, 0, 0);
 
-        game.font.draw(game.batch, "HP do Boss: " + manager.chefao.getHP(), 0, 480);
-        game.font.draw(game.batch, "HP do Heroi: " + manager.jogador.getHP(), 0, 40);
+        game.font.draw(game.batch, " Boss State: " + manager.chefao.getState() + "Boss HP: " + manager.chefao.getHP(), 0, 480);
+        game.font.draw(game.batch, " Your State: " +  manager.jogador.getState() + "Your HP: " + manager.jogador.getHP() , 0, 40);
 
        // game.batch.draw(manager.jogador.getPlayerImage(), manager.jogador.getX(), manager.jogador.getY());
 
@@ -112,24 +113,34 @@ public class Ecra implements Screen {
 
 
         drawProjectiles();
+        drawMinions();
         game.batch.end();
 
 
        manager.inputs().processUserInput();
        manager.logic(delta);
 
+
+       if(manager.getGameState() != 0){
+           EndScreen fim = new EndScreen(game);
+
+           game.setScreen(new EndScreen(game));
+
+           dispose();
+       }
+
     }
 
 
 
-    public void drawProjectiles(){
+    private void drawProjectiles(){
 
        drawIndividualProjectiles(manager.bossBullets);
        drawIndividualProjectiles(manager.heroBullets);
     }
 
 
-    public void drawIndividualProjectiles(Array<Projectile> balas){
+    private void drawIndividualProjectiles(Array<Projectile> balas){
         for (Projectile tiro : balas) {
 
            if(tiro.getHeight() < 0)
@@ -142,6 +153,14 @@ public class Ecra implements Screen {
             game.batch.draw(regiao, tiro.getX(), tiro.getY(), OriginX, OriginY, regiao.getRegionWidth(), regiao.getRegionHeight(), 1, 1,(float)tiro.getAngleDegrees());
         }
 
+    }
+
+    private void drawMinions(){
+
+        for(Minion bicho: manager.minions)
+        {
+            game.batch.draw(bicho.getMinionImage(), bicho.getX(), bicho.getY());
+        }
     }
 
     @Override
@@ -167,6 +186,9 @@ public class Ecra implements Screen {
 
     @Override
     public void dispose() {
+
+
+
 
     }
 

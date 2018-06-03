@@ -16,6 +16,7 @@ public class Boss extends Character {
     float tempX, tempY;
     double fireFrequency;
     int fireSpeed;
+    boolean jamudou;
 
     public Boss() {
         super();
@@ -37,6 +38,7 @@ public class Boss extends Character {
         fireSpeed = 100;
         this.setWidth(100);
         this.setHeight(100);
+        jamudou = false;
     }
 
 
@@ -79,6 +81,8 @@ public class Boss extends Character {
         setY(tempY);
         changeDirectionTimer = changeDirectionTimer - 1;
 
+
+
     }
 
     public void doubleFire(){ fireFrequency = fireFrequency/2;
@@ -89,52 +93,26 @@ public class Boss extends Character {
     }
 
     public void angleChange(Player jogador) {
+        if (this.getX() <= jogador.getX() && this.getY() <= jogador.getY())
+            angle = auxCalc(jogador); //Q1
 
+        else if (this.getX() <= jogador.getX() && this.getY() > jogador.getY())
+            angle = auxCalc(jogador);
 
-//        if (this.getX() - jogador.getX() > Math.abs(20) && this.getY() - jogador.getY() > Math.abs(20)) {
-           if (this.getX() <= jogador.getX() && this.getY() <= jogador.getY())
-               angle = auxCalc(jogador); //Q1
-//            {
-//                // this.angle = auxCalc(jogador);
-//                angle = 135;
-//
-               //
-                else if (this.getX() <= jogador.getX() && this.getY() > jogador.getY())
-               angle = auxCalc(jogador);//2
-//            {
-//                // this.angle = auxCalc(jogador) + 90;
-//                angle = 45;
-//
-        else if (this.getX() > jogador.getX() && this.getY() > jogador.getY()) //ESTÁ A DAR
-               angle = auxCalc(jogador) + 180;//Q3
-//            {
-//                //this.angle = auxCalc(jogador) + 180;
-//                angle = 315;
-//
+        else if (this.getX() > jogador.getX() && this.getY() > jogador.getY())
+            angle = auxCalc(jogador) + 180;
+
         else if (this.getX() > jogador.getX() && this.getY() <= jogador.getY())
-                angle = auxCalc(jogador) + 180;//Q4
-//            {
-//                // this.angle = auxCalc(jogador) - 90;
-//                angle = 225;
-//            }
+            angle = auxCalc(jogador) + 180;
 
-        //parte que funciona
-//        if(Math.abs(this.getX() - jogador.getX()) > Math.abs(this.getY() - jogador.getY())){
-//            if (this.getY() - jogador.getY() >= 0)
-//                angle = 180;
-//
-//            else angle = 0;
-//        }
-//        else {
-//            if (this.getX() - jogador.getX() >= 0)
-//                angle = 90;
-//
-//            else angle = 270;
-//        }
+        if(getState() == "Dying" && !jamudou)
+        {
+            doubleFire();
+            jamudou = true;
+        }
+    }
 
 
-
-}
     private float auxCalc(Player jogador)
     {
         float auxX, auxY;
@@ -149,6 +127,7 @@ public class Boss extends Character {
         return Math.sqrt(Math.pow(this.getX() - jogador.getX(),2) + Math.pow(this.getY() - jogador.getY(),2)) < 100;
 
     }
+
 
 
 

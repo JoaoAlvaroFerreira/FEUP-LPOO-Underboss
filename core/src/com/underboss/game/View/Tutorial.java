@@ -14,21 +14,19 @@ import com.underboss.game.Underboss;
 
 import java.util.concurrent.TimeUnit;
 
-public class Overworld implements Screen {
+public class Tutorial implements Screen {
     private Underboss game;
     OrthographicCamera camera;
-    Texture initScreen;
+    Texture tutorialScreen;
 
 
-
-    public Overworld(final Underboss gam) {
+    public Tutorial(final Underboss gam) {
         game = gam;
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
         this.resize(800,400);
-        initScreen = new Texture(Gdx.files.internal("initScreen.PNG"));
-
+        tutorialScreen = new Texture(Gdx.files.internal("tutorialScreen.PNG"));
 
 
     }
@@ -36,20 +34,18 @@ public class Overworld implements Screen {
     @Override
     public void render(float delta) {
 
+
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
-        game.batch.draw(initScreen, 0, 0);
+        game.batch.draw(tutorialScreen, 0, 0);
         game.batch.end();
 
-
-
-
         if (Gdx.input.justTouched()) {
-                game.setScreen(new Tutorial(game));
 
-                dispose();
+            game.setScreen(new Ecra(game));
+            dispose();
 
         }
     }

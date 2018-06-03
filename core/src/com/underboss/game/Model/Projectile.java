@@ -11,40 +11,52 @@ public class Projectile extends Rectangle {
     int direction; //0-360, começando em apontando para cima
     int acceleration;
     double angle;
+    Boolean poison;
 
     Texture imagem;
     Texture tiroBoss = new Texture(Gdx.files.internal("bossShot1.png"));
     Texture tiroHero = new Texture(Gdx.files.internal("heroShot1.png"));
+    Texture tiroBoss2 = new Texture(Gdx.files.internal("bossShot2.png"));
 
-    public Projectile(Character personagem, int nSpeed, int nDirection, float angle, float width, float height){
+    public Projectile(Character personagem, int nSpeed, float angle, float width, float height){
     disparou = personagem;
     x = personagem.getX();
     y = personagem.getY();
     speed = nSpeed;
-    direction = nDirection;
     this.angle = angle;
     this.width = width;
     this.height = height;
-
+    poison = false;
     }
 
-    public Projectile(Character personagem, int nSpeed, int nDirection, float width, float height){
+    public Projectile(Character personagem, int nSpeed, float width, float height){
         disparou = personagem;
         x = personagem.getX();
         y = personagem.getY();
         speed = nSpeed;
         angle = personagem.getAngle();
-        direction = nDirection;
         this.width = width;
         this.height = height;
+        poison = false;
+
+    }
+
+    private void poisonProjectile(){
+        poison = true;
+        imagem = tiroBoss2;
     }
 
     public void setTiro(Texture img)
     {
         imagem = img;
+
+
     }
 
-    public void setAngle(float angle){ this.angle = angle;};
+    public void setAngle(float angle){ this.angle = angle;
+
+
+    };
 
     public double getAngle(){return Math.toRadians(angle);}
 
@@ -54,6 +66,8 @@ public class Projectile extends Rectangle {
 
     public void setBossTiro(){
         imagem = tiroBoss;
+        if(disparou.getState() == "Dying")
+            poisonProjectile();
     }
 
     public void setHeroTiro(){
@@ -67,5 +81,7 @@ public class Projectile extends Rectangle {
     public Character getDisparou() {
         return disparou;
     }
+
+    public boolean getPoison(){ return poison; }
 
 }

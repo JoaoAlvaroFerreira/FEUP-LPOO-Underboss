@@ -2,18 +2,20 @@ package com.underboss.game.Model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.TimeUtils;
 
-import java.lang.reflect.Array;
-import java.util.Iterator;
+import java.util.ArrayList;
+
 
 public abstract class Character extends Rectangle {
 
 
-    int HP;
-    int maxHP;
+    float HP;
+    float maxHP;
     double angle;
     int estadoAtual;
-    String[] estados;
+    private ArrayList<String> estados = new ArrayList<String>();
 
 
     Character(){
@@ -53,11 +55,15 @@ public abstract class Character extends Rectangle {
     }
 
     private void initEstados(){
-        String[] estados = {"Healthy", "Poisoned", "Dying", "Dead", "Invincible"};
+        estados.add("Healthy");
+        estados.add("Poisoned");
+        estados.add("Dying");
+        estados.add("Dead");
+        estados.add("Invincible");
         estadoAtual = 0;
     }
 
-    public int getHP() {
+    public float getHP() {
         return HP;
     }
 
@@ -70,14 +76,18 @@ public abstract class Character extends Rectangle {
 
     public void checkState() {
 
-        if(HP < maxHP/3)
+
+
+        if(HP <= maxHP/3)
             estadoAtual = 2;
         if(HP < 1)
             estadoAtual = 3;
 
+
+        poisonTick();
     }
 
-    public void setHP(int HP) {
+    public void setHP(float HP) {
         this.HP = HP;
     }
 
@@ -86,13 +96,26 @@ public abstract class Character extends Rectangle {
     public Boolean bulletDamage(Projectile tiro){
         if (tiro.overlaps(this)) {
             this.loseHP();
+            if(tiro.getPoison()) {
+                estadoAtual = 1;
+                }
             return true;
         }
         return false;
     }
 
     public String getState(){
-        return estados[estadoAtual];
+        return estados.get(estadoAtual);
+    }
+
+    public void setState(int i){
+        this.estadoAtual = i;
+    }
+
+    protected void poisonTick(){
+        if(getState() == "Poisoned")
+            setHP(getHP() - Gdx.graphics.getDeltaTime()/3);
+
     }
 
 }

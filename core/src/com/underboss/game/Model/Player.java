@@ -2,33 +2,38 @@ package com.underboss.game.Model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.TimeUtils;
 
 
 public class Player extends Character {
 
+    float TimeSinceHit;
+    float SafetyTime;
     Texture playerImage = new Texture(Gdx.files.internal("Shooter1.png"));
 
     public Player(){
         super();
-        this.height = 78;
-        this.width = 48;
-        this.angle = 0;
+       initVariables();
     }
 
     public Player(int x, int y){
         super(x, y);
-        this.height = 78;
-        this.width = 48;
-        this.angle = 0;
+       initVariables();
     }
 
     public Player(int x, int y, int HP){
         super(x, y, HP);
+        initVariables();
+    }
+
+    private void initVariables(){
+
         this.height = 78;
         this.width = 48;
         this.angle = 0;
+        TimeSinceHit = 0;
+        SafetyTime = 2000000000;
     }
-
     public Texture getPlayerImage(){
         return playerImage;
     }
@@ -68,6 +73,54 @@ public class Player extends Character {
         }
         return false;
     }
+
+    public void makePlayerInvincible(){
+        this.setState(4);
+        this.TimeSinceHit = TimeUtils.nanoTime();
+
+
+    }
+
+    public void makePlayerNormal(){
+        this.setState(0);
+        TimeSinceHit = 0;
+    }
+
+
+
+    @Override
+    public void loseHP(){
+
+
+        if(getState() != "Invincible") {
+            if (HP > 0) {
+                setHP(getHP() - 1);
+                Gdx.input.vibrate(1000);
+                makePlayerInvincible();
+            }
+        }
+
+        checkState();
+    }
+
+    @Override
+    public void checkState() {
+
+
+        if(getState() != "Invincible") {
+
+            if (HP <= maxHP / 3)
+                estadoAtual = 2;
+            if (HP < 1)
+                estadoAtual = 3;
+        }
+
+        if(TimeUtils.nanoTime() - TimeSinceHit > SafetyTime)
+         makePlayerNormal();
+
+        poisonTick();
+    }
+
 
 
 

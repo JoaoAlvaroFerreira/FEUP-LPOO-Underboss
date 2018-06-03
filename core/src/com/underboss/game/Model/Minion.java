@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 public class Minion extends Character {
 
     float auxX,auxY;
-    Texture minionImage;
+    Texture  minionImage = new Texture(Gdx.files.internal("minion1.png"));
 
     public Minion(Boss chefe){
 
@@ -14,8 +14,6 @@ public class Minion extends Character {
         this.y = chefe.getY();
         this.HP = 2;
         this.maxHP = 2;
-        minionImage = new Texture(Gdx.files.internal("minion1.png"));
-
 
     }
 
@@ -23,9 +21,12 @@ public class Minion extends Character {
         auxX = jogador.getX() - this.getX() ;
         auxY = jogador.getY() - this.getY() ;
 
-        setX((float)(getX() + auxX*0.1));
-        setY((float)(getY() + auxY*0.1));
+        setX(getX() + auxX * Gdx.graphics.getDeltaTime());
+        setY(getY() + auxY * Gdx.graphics.getDeltaTime());
     }
 
 
+    public Texture getMinionImage(){
+        return minionImage;
+    }
 }

@@ -14,21 +14,23 @@ import com.underboss.game.Underboss;
 
 import java.util.concurrent.TimeUnit;
 
-public class Overworld implements Screen {
+public class EndScreen implements Screen {
     private Underboss game;
     OrthographicCamera camera;
-    Texture initScreen;
+    Texture winScreen;
+    Texture loseScreen;
+    int vitoria;
 
 
-
-    public Overworld(final Underboss gam) {
-        game = gam;
+    public EndScreen(Underboss gam) {
+        this.game = gam;
+        vitoria = gam.manager.getGameState();
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
         this.resize(800,400);
-        initScreen = new Texture(Gdx.files.internal("initScreen.PNG"));
-
+        winScreen = new Texture(Gdx.files.internal("winScreen.PNG"));
+        loseScreen = new Texture(Gdx.files.internal("loseScreen.PNG"));
 
 
     }
@@ -36,22 +38,25 @@ public class Overworld implements Screen {
     @Override
     public void render(float delta) {
 
+
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
-        game.batch.begin();
-        game.batch.draw(initScreen, 0, 0);
-        game.batch.end();
 
 
 
-
-        if (Gdx.input.justTouched()) {
-                game.setScreen(new Tutorial(game));
-
-                dispose();
-
+        if(vitoria == 1) {
+            game.batch.begin();
+            game.batch.draw(winScreen, 0, 0);
+            game.batch.end();
         }
+        else {
+            game.batch.begin();
+            game.batch.draw(loseScreen, 0, 0);
+            game.batch.end();
+        }
+
+
     }
 
 
@@ -77,5 +82,7 @@ public class Overworld implements Screen {
 
     @Override
     public void dispose() {
+
+
     }
 }

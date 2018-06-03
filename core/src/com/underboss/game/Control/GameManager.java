@@ -4,9 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.underboss.game.Model.Boss;
+import com.underboss.game.Model.Character;
 import com.underboss.game.Model.Minion;
 import com.underboss.game.Model.Player;
 import com.underboss.game.Model.Projectile;
+import com.underboss.game.View.EndScreen;
+import com.underboss.game.View.Tutorial;
 
 import java.awt.Rectangle;
 import java.util.Iterator;
@@ -21,7 +24,10 @@ public class GameManager {
     public Array<Projectile> heroBullets;
     public Array<Minion> minions;
     long lastShotTime;
+    long lastMinionTime;
     long lastHeroShotTime;
+    int gameEnd;
+
 
 
     public GameManager(){
@@ -31,15 +37,18 @@ public class GameManager {
     public void init(){
 
 
-        jogador = new Player (800 / 2 -  48 / 2,20, 8);
+        jogador = new Player (800 / 2 -  48 / 2,20, 15);
         jogador.setAngle(90);
 
-        //init the Boss
-       chefao = new Boss(800 / 2 -  78 / 2, 380, 15);
-      //  chefao = new Boss(400, 200, 15);
+
+        chefao = new Boss(800 / 2 -  78 / 2, 380, 30);
         chefao.setAngle(270);
 
+
+
         lastShotTime = 0;
+        lastMinionTime = 0;
+        lastHeroShotTime = 0;
         bossBullets = new Array<Projectile>();
         heroBullets = new Array<Projectile>();
         minions = new Array<Minion>();
@@ -52,41 +61,26 @@ public class GameManager {
 
     public void logic(float delta){
 
-        if (jogador.getX() < 0)
-            jogador.setX(0);
-        if (jogador.getX() > 800 - 48)
-            jogador.setX(800- 48);
-        if (jogador.getY() < 0)
-            jogador.setY(0);
-        if (jogador.getY() > 480 - 78)
-            jogador.setY(480-78);
-
-        if(outofbounds(chefao))
-        {
-            chefao.setX(400);
-            chefao.setY(240);
-        }
 
 
 
-
-     //   chefao.move(delta);
+       // chefao.move(delta);
+        // timeMinions();
+        // timeFire();
+        // minionIterator();
+        // bossFireIterator();
         chefao.angleChange(jogador);
-
         chefao.checkState();
-       jogador.checkState();
-      //  timeMinions();
-        timeFire();
-        bossFireIterator();
-           heroFireIterator();
-       // minionIterator();
+        jogador.checkState();
+        heroFireIterator();
+        recalibrate(jogador);
+        recalibrate(chefao);
 
-//
-//        if(chefao.getState() == "Dead")
-//            winGame();
-//
-//        if(jogador.getState() == "Dead")
-//            loseGame();
+        if(chefao.getState() == "Dead")
+            winGame();
+
+        if(jogador.getState() == "Dead")
+            loseGame();
 
 
     }
@@ -97,6 +91,18 @@ public class GameManager {
         return instance;
     }
 
+    public void recalibrate(Character obj){
+
+        if (obj.getX() < 0)
+            obj.setX(0);
+        if (obj.getX() > 800 - 48)
+            obj.setX(800- 48);
+        if (obj.getY() < 0)
+            obj.setY(0);
+        if (obj.getY() > 480 - 78)
+            obj.setY(480-78);
+
+    }
     public static MyInputProcessor inputs(){
 
         return inputs;
@@ -107,28 +113,35 @@ public class GameManager {
         bossFire();
         lastShotTime = TimeUtils.nanoTime();
     }
+
     }
 
     private void timeMinions() {
-        if(chefao.getState() == "Dying") {
-            if (TimeUtils.nanoTime() - lastShotTime > chefao.getFireFrequency() * 2) {
+
+
+            if (TimeUtils.nanoTime() - lastMinionTime > chefao.getFireFrequency() * 3) {
                 generateMinions();
-                lastShotTime = TimeUtils.nanoTime();
+                lastMinionTime = TimeUtils.nanoTime();
             }
-        }
+
     }
     public void bossFire() {
-        Projectile tiro = new Projectile(chefao, chefao.getFireSpeed(), 180,(float)chefao.getAngle(), 70, 80 );
+        Projectile tiro = new Projectile(chefao, chefao.getFireSpeed(), (float)chefao.getAngle(), 70, 80 );
         tiro.setBossTiro();
         bossBullets.add(tiro);
 
         lastShotTime = TimeUtils.nanoTime();
     }
+
     public void heroFire(float angle) {
-        jogador.setAngle(angle);
-        Projectile tiro = new Projectile(jogador, 300, 180, angle, 40, 30 );
-        tiro.setHeroTiro();
-        heroBullets.add(tiro);
+
+        if (TimeUtils.nanoTime() - lastHeroShotTime > chefao.getFireFrequency() / 10) {
+            jogador.setAngle(angle);
+            Projectile tiro = new Projectile(jogador, 300, angle, 40, 30);
+            tiro.setHeroTiro();
+            heroBullets.add(tiro);
+            lastHeroShotTime = TimeUtils.nanoTime();
+        }
     }
 
     public void generateMinions(){
@@ -207,8 +220,19 @@ public class GameManager {
       return false;
     }
 
-    private void winGame(){}
+    private void winGame(){
+        gameEnd = 1;
 
-    private void loseGame(){}
+    }
+
+    private void loseGame(){
+        gameEnd = 2;
+
+    }
+
+    public int getGameState(){
+
+        return gameEnd;
+    }
 
 }

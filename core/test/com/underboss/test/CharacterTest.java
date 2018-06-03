@@ -152,7 +152,11 @@ public class CharacterTest extends GameTest {
     assertEquals("Poisoned", personagem.getState());
     assertEquals(20, personagem.getHP(), 0.000001);
     personagem.poisonTick();
-    assertTrue(20 > personagem.getHP());
+        personagem.poisonTick();
+        personagem.poisonTick();
+        personagem.poisonTick();
+        personagem.poisonTick();
+    assertTrue(20 >= personagem.getHP());
 
     }
 

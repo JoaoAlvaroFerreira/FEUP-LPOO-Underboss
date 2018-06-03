@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="android/build/generated/source/buildConfig/debug"/>
+	<classpathentry kind="src" path="android/build/generated/source/r/debug"/>
+	<classpathentry kind="src" path="core/src"/>
+	<classpathentry kind="src" path="desktop/src"/>
+	<classpathentry exported="true" kind="lib" path="android/build/intermediates/pre-dexed/debug/core-1.0_e018453ac99a892024cd79bd938d3e837a790fde.jar"/>
+	<classpathentry exported="true" kind="lib" path="android/build/intermediates/pre-dexed/debug/debug_1baf7c35ba3ebca98155effabe0059951fceaa6a.jar"/>
+	<classpathentry exported="true" kind="lib" path="android/build/intermediates/pre-dexed/debug/gdx-1.9.8_d1f01d009ab6ff6ea141d943c31e5129faafeb72.jar"/>
+	<classpathentry exported="true" kind="lib" path="android/build/intermediates/pre-dexed/debug/gdx-ai-1.8.0_9359c5786da29018796656ed50a669d78656bd99.jar"/>
+	<classpathentry exported="true" kind="lib" path="android/build/intermediates/pre-dexed/debug/gdx-backend-android-1.9.8_6172fe465a311ecc0b2a60f7e6a86a741ce8dc23.jar"/>
+	<classpathentry exported="true" kind="lib" path="android/build/intermediates/pre-dexed/debug/gdx-box2d-1.9.8_ad85ab9644f76d2cd4761d80feec5839f3115817.jar"/>
+	<classpathentry exported="true" kind="lib" path="android/build/intermediates/pre-dexed/debug/gdx-controllers-1.9.8_5498db20cbbecaa3f6cf314d3e60ca80d2f1ef4f.jar"/>
+	<classpathentry exported="true" kind="lib" path="android/build/intermediates/pre-dexed/debug/gdx-controllers-android-1.9.8_3cc2541e87b9f914873d22dc1ab976d796944e6c.jar"/>
+	<classpathentry exported="true" kind="lib" path="android/build/intermediates/transforms/mergeJavaRes/debug/jars/2/1f/main.jar"/>
+	<classpathentry exported="true" kind="lib" path="core/build/libs/core-1.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="desktop/build/libs/desktop-1.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/joaoa/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.9.8/a35a0076fbce873f9c2d5a1a1c8066244231bb3c/gdx-1.9.8.jar" sourcepath="C:/Users/joaoa/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.9.8/bac17f395be5010619b31280fe84e9f53118d0b9/gdx-1.9.8-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/joaoa/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-lwjgl/1.9.8/b7c138f14ed67ad830ae7597da3d86ae02b20eee/gdx-backend-lwjgl-1.9.8.jar" sourcepath="C:/Users/joaoa/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-lwjgl/1.9.8/680fd8ed8d823a1510d4bea1ab59248934d1deca/gdx-backend-lwjgl-1.9.8-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/joaoa/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.9.8/84024cd60ad6f26370891fbcd17de9f0167e662/gdx-backend-android-1.9.8.jar" sourcepath="C:/Users/joaoa/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.9.8/fa6c464c1a911ce39f252cb2b86e9d05eecb6a1d/gdx-backend-android-1.9.8-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/joaoa/.gradle/caches/modules-2/files-2.1/com.google.gwt/gwt-servlet/2.8.0/8fba7d39f9a341892cda502aacb2f5287bd49309/gwt-servlet-2.8.0.jar" sourcepath="C:/Users/joaoa/.gradle/caches/modules-2/files-2.1/com.google.gwt/gwt-servlet/2.8.0/f2ea4f4762b01d4df035582a29524acea5a5403e/gwt-servlet-2.8.0-sources.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="android/build/intermediates/classes/debug"/>
+</classpath>

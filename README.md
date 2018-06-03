@@ -49,7 +49,7 @@ I ended up only meeting the last two goals – and despite doing a good job at t
 
 - Set up Android Studio with an Android Emulator;
 - Import the project into Android Studio;
-- Unload the HTML module (you can do this by right clicking on the project &gt; Load/Unload Modules);
+- Unload the HTML module, as it sometimes causes issues (you can do this by right clicking on the project &gt; Load/Unload Modules);
 - Go to Run&gt;Edit Configurations and make sure that the working directory of the DesktopLauncher is &quot;…\android\assets&quot; ;
 - With all of this done, you should be able to run the project with both Android and the DesktopLauncher run options.
 

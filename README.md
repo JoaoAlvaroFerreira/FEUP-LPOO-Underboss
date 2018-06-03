@@ -43,9 +43,9 @@ I ended up only meeting the last two goals – and despite doing a good job at t
 
 
 
-##**User Manual**
+## **User Manual**
 
- **How to run the development environment**
+## **How to run the development environment**
 
 - Set up Android Studio with an Android Emulator;
 - Import the project into Android Studio;
@@ -53,7 +53,7 @@ I ended up only meeting the last two goals – and despite doing a good job at t
 - Go to Run&gt;Edit Configurations and make sure that the working directory of the DesktopLauncher is &quot;…\android\assets&quot; ;
 - With all of this done, you should be able to run the project with both Android and the DesktopLauncher run options.
 
- **How to run the testing units**
+## **How to run the testing units**
 
 - Open each class individually, hover your pointer over the name of each class and press &quot;Alt + Enter&quot;, which will prompt you to run a test of that class;
 - Alternatively, go to Run&gt;Edit Configurations and Add Configuration (the plus sign in the corner) and make sure the Test Kind is class, &quot;Use classpath of module&quot; has core selected, and the classes are &quot;com.underboss.Test.&quot; and then each class one by one.

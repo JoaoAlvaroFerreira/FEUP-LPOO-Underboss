@@ -71,19 +71,19 @@ I ended up only meeting the last two goals – and despite doing a good job at t
 
 **Intro screen**
 
-!(altText)[https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/master/android/assets/initScreen.PNG?raw=true]
+![altText](https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/master/android/assets/initScreen.PNG?raw=true)
 - As soon as you open the game, you&#39;ll be greeted by an intro screen.
 - Tap or click to go forward.
 
 **Tutorial screen**
 
-!(altText)[https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/master/android/assets/tutorialScreen.PNG?raw=true]
+![altText](https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/master/android/assets/tutorialScreen.PNG?raw=true)
 - This screen gives you the instructions on how to play the game.
 - Tap or click to go forward.
 
 **In-Game**
 
-!(altText)[https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/InGamePrint.PNG?raw=true]
+![altText](https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/InGamePrint.PNG?raw=true)
 - Two indicators to show boss and player health, along with status.
 - The player can shoot his laser beam and walk in four directions, as was indicated in the tutorial screen.
 - The boss has multiple types of attacks: he can summon minions to chase the player, throw energy blasts that will aim at the player&#39;s position at the time that it was fired, and will attack the player with a lightsaber if the player gets too close (or if he gets too close to the player).
@@ -94,8 +94,8 @@ I ended up only meeting the last two goals – and despite doing a good job at t
 **Ending Screen**
 
 
-!(altText)[https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/master/android/assets/winScreen.PNG?raw=true]
+![altText](https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/master/android/assets/winScreen.PNG?raw=true)
 
-!(altText)[https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/master/android/assets/loseScreen.PNG?raw=true]
+![altText](https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/master/android/assets/loseScreen.PNG?raw=true)
 - Depending on who dies first, the player might get a Victory or Defeat screen.
 - Either way, the player can tap again to go back to the intro screen and start all over again.

@@ -83,7 +83,7 @@ I ended up only meeting the last two goals – and despite doing a good job at t
 
 **In-Game**
 
-![altText](https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/InGamePrint.PNG?raw=true)
+![altText](https://github.com/JoaoAlvaroFerreira/LPOO-Underboss/blob/master/InGamePrint.png?raw=true)
 - Two indicators to show boss and player health, along with status.
 - The player can shoot his laser beam and walk in four directions, as was indicated in the tutorial screen.
 - The boss has multiple types of attacks: he can summon minions to chase the player, throw energy blasts that will aim at the player&#39;s position at the time that it was fired, and will attack the player with a lightsaber if the player gets too close (or if he gets too close to the player).

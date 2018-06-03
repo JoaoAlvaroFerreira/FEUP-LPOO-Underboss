@@ -19,7 +19,10 @@ public class Tutorial implements Screen {
     OrthographicCamera camera;
     Texture tutorialScreen;
 
-
+    /**
+     * constructor for the tutorial class
+     * @param gam
+     */
     public Tutorial(final Underboss gam) {
         game = gam;
 
@@ -31,6 +34,10 @@ public class Tutorial implements Screen {
 
     }
 
+    /**
+     * renders the tutorial class for the game
+     * @param delta
+     */
     @Override
     public void render(float delta) {
 
@@ -45,33 +52,60 @@ public class Tutorial implements Screen {
         if (Gdx.input.justTouched()) {
 
             game.setScreen(new Ecra(game));
-            dispose();
+
 
         }
     }
 
 
+    /**
+     * resizes the screen if needed (not used)
+     * @param width
+     * @param height
+     */
     @Override
     public void resize(int width, int height) {
     }
 
+    /**
+     * shows the screen (not used)
+     */
     @Override
     public void show() {
+
     }
+
+    /**
+     * hides the screen (not used)
+     */
 
     @Override
     public void hide() {
     }
 
+    /**
+     * pauses the screen activities
+     */
+
     @Override
     public void pause() {
     }
 
+    /**
+     * resumes the screen activities
+     */
     @Override
     public void resume() {
     }
 
+    /**
+     * disposes of the elements previously loaded onto the screen
+     */
+
     @Override
     public void dispose() {
+
+        game.batch.dispose();
+        game.font.dispose();
     }
 }

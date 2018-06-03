@@ -17,7 +17,9 @@ public abstract class Character extends Rectangle {
     int estadoAtual;
     private ArrayList<String> estados = new ArrayList<String>();
 
-
+    /**
+     * constructor for the abstract class character
+     */
     Character(){
         x = 240;
         y = 400;
@@ -28,6 +30,12 @@ public abstract class Character extends Rectangle {
 
     }
 
+    /**
+     * constructor for the abstract class character
+     * @param xpos
+     * @param ypos
+     */
+
     Character(int xpos, int ypos){
         x = xpos;
         y = ypos;
@@ -36,6 +44,13 @@ public abstract class Character extends Rectangle {
 
 
     }
+
+    /**
+     * constructor for the abstract class character
+     * @param xpos
+     * @param ypos
+     * @param HP
+     */
 
     Character(int xpos, int ypos, int HP){
         x = xpos;
@@ -48,6 +63,9 @@ public abstract class Character extends Rectangle {
 
     }
 
+    /**
+     * makes sure characters stay inside the arena
+     */
 
     public void recalibrate(){
 
@@ -62,9 +80,18 @@ public abstract class Character extends Rectangle {
 
     }
 
+    /**
+     * sets a new angle
+     * @param novoAngulo
+     */
+
     public void setAngle(double novoAngulo){
         this.angle = novoAngulo;
     }
+
+    /**
+     * defines the possible states for a character and initializes them at Healthy
+     */
 
     private void initEstados(){
         estados.add("Healthy");
@@ -75,9 +102,17 @@ public abstract class Character extends Rectangle {
         estadoAtual = 0;
     }
 
+    /**
+     * returns the character's HP
+     * @return HP
+     */
     public float getHP() {
         return HP;
     }
+
+    /**
+     * makes the character lose one HP without going under 0, and proceeding to check their current state
+     */
 
     public void loseHP(){
         if(HP > 0)
@@ -85,6 +120,10 @@ public abstract class Character extends Rectangle {
 
         checkState();
     }
+
+    /**
+     * checks a character's current state and updates it if needed
+     */
 
     public void checkState() {
 
@@ -97,12 +136,26 @@ public abstract class Character extends Rectangle {
         poisonTick();
     }
 
+    /**
+     * sets a character's HP
+     * @param HP
+     */
     public void setHP(float HP) {
         this.HP = HP;
     }
 
+    /**
+     * returns the character's angle
+     * @return angle
+     */
+
     public double getAngle() {return angle;}
 
+    /**
+     * causes bullet damage to the character
+     * @param tiro
+     * @return if the character got damaged or not
+     */
     public Boolean bulletDamage(Projectile tiro){
         if (tiro.overlaps(this)) {
             this.loseHP();
@@ -114,13 +167,26 @@ public abstract class Character extends Rectangle {
         return false;
     }
 
+    /**
+     * gets the character's state in String form
+     * @return the character's state
+     */
     public String getState(){
         return estados.get(estadoAtual);
     }
 
+    /**
+     * sets the character's state
+     * @param i
+     */
+
     public void setState(int i){
         this.estadoAtual = i;
     }
+
+    /**
+     * deals one tick of poison damage to the character, repeating while the character is poisoned and dealing damage over time
+     */
 
     public void poisonTick(){
         if(getState() == "Poisoned")

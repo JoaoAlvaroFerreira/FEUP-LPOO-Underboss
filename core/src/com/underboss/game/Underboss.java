@@ -12,6 +12,9 @@ public class Underboss extends Game {
 	public BitmapFont font;
 	public GameManager manager;
 
+	/**
+	 * creates a new batch and font, and sets up the intro screen
+	 */
 	public void create() {
 		batch = new SpriteBatch();
 
@@ -19,14 +22,25 @@ public class Underboss extends Game {
 		this.setScreen(new Overworld(this));
 	}
 
+	/**
+	 * draws everything
+	 */
 	public void render() {
-		super.render(); // important!
+		super.render();
 	}
 
+	/**
+	 * disposes of the assets once the game is done
+	 */
 	public void dispose() {
 		batch.dispose();
 		font.dispose();
 	}
+
+	/**
+	 * sets a GameManager for this Game
+	 * @param gestor
+	 */
 
 	public void setManager(GameManager gestor){
 		manager = gestor;

@@ -41,6 +41,10 @@ public class Ecra implements Screen {
     OrthographicCamera camera;
 
 
+    /**
+     * the constructor for ecra, the main gameplay rendering class
+     * @param gam
+     */
     public Ecra(Underboss gam) {
         this.game = gam;
         this.manager = new GameManager();
@@ -53,11 +57,19 @@ public class Ecra implements Screen {
 
     }
 
+    /**
+     * initiates the camera with its proper dimensions
+     */
+
     private void initCamera(){
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
     }
+
+    /**
+     * loads images and initializes variables important to the class
+     */
     private void preload(){
 
         bossOriginX = (int)manager.chefao.getWidth();
@@ -75,9 +87,19 @@ public class Ecra implements Screen {
         regiaoSword = new TextureRegion(swords);
     }
 
+    /**
+     * gets the current camera being used
+     * @return
+     */
+
     public OrthographicCamera getCamera() {
         return camera;
     }
+
+    /**
+     * draws all of the gameplay on screen
+     * @param delta
+     */
 
     @Override
     public void render(float delta) {
@@ -134,12 +156,15 @@ public class Ecra implements Screen {
 
            game.setScreen(new EndScreen(game));
 
-           dispose();
+
        }
 
     }
 
 
+    /**
+     * calls the method to draw the projectiles of both the boss and the player
+     */
 
     private void drawProjectiles(){
 
@@ -147,6 +172,10 @@ public class Ecra implements Screen {
        drawIndividualProjectiles(manager.heroBullets);
     }
 
+    /**
+     * draws any projectiles
+     * @param balas
+     */
 
     private void drawIndividualProjectiles(Array<Projectile> balas){
         for (Projectile tiro : balas) {
@@ -163,6 +192,10 @@ public class Ecra implements Screen {
 
     }
 
+    /**
+     * draws the minions spawned by the boss
+     */
+
     private void drawMinions(){
 
         for(Minion bicho: manager.minions)
@@ -171,33 +204,55 @@ public class Ecra implements Screen {
         }
     }
 
+    /**
+     * resizes the screen if needed (not used)
+     * @param width
+     * @param height
+     */
     @Override
     public void resize(int width, int height) {
     }
 
+    /**
+     * shows the screen (not used)
+     */
     @Override
     public void show() {
 
     }
 
+    /**
+     * hides the screen (not used)
+     */
+
     @Override
     public void hide() {
     }
+
+    /**
+     * pauses the screen activities
+     */
 
     @Override
     public void pause() {
     }
 
+    /**
+     * resumes the screen activities
+     */
     @Override
     public void resume() {
     }
 
+    /**
+     * disposes of the elements previously loaded onto the screen
+     */
+
     @Override
     public void dispose() {
 
-
-
-
+        game.batch.dispose();
+        game.font.dispose();
     }
 
 }

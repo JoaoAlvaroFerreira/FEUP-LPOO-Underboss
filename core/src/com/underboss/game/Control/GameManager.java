@@ -37,11 +37,18 @@ public class GameManager {
     Texture minionImage;
 
 
+    /**
+     * Constructor for class GameManager
+     */
 
 
     public GameManager(){
         init();
     }
+
+    /**
+     *  init for all the variables in GameManager
+     */
 
     public void init(){
 
@@ -69,6 +76,10 @@ public class GameManager {
         loadTextures();
     }
 
+    /**
+     *  loader for all the textures in GameManager
+     */
+
     private void loadTextures(){
 
         tiroBoss = new Texture(Gdx.files.internal("bossShot1.png"));
@@ -80,6 +91,11 @@ public class GameManager {
         chefao.setTexture(bossImage);
         minionImage = new Texture(Gdx.files.internal("minion1.png"));
     }
+
+    /**
+     * the logic loop in GameManager
+     * @param delta is the runTime
+     */
 
 
     public void logic(float delta){
@@ -108,17 +124,31 @@ public class GameManager {
 
     }
 
+    /**
+     * if there isn't one already, creates a static instance of this GameManager
+     * @return the static instance of GameManager
+     */
+
     public static GameManager controlador() {
         if (instance == null)
             instance = new GameManager();
         return instance;
     }
 
+    /**
+     * get method for the input processor
+     * @return static input processor
+     */
+
 
     public static MyInputProcessor inputs(){
 
         return inputs;
     }
+
+    /**
+     * Calculates the time between every new boss shot, and then shoots it once that time interval is over
+     */
 
     private void timeFire(){
         if(TimeUtils.nanoTime() - lastShotTime > chefao.getFireFrequency()) {
@@ -127,6 +157,10 @@ public class GameManager {
     }
 
     }
+
+    /**
+     * times the generation of minions by the boss
+     */
 
     private void timeMinions() {
 
@@ -138,6 +172,10 @@ public class GameManager {
 
     }
 
+    /**
+     * generates the projectiles for the boss fire
+     */
+
     public void bossFire() {
         Projectile tiro = new Projectile(chefao, chefao.getFireSpeed(), (float)chefao.getAngle(), 70, 80 );
         tiro.setTiroBoss(tiroBoss);
@@ -146,6 +184,11 @@ public class GameManager {
         bossBullets.add(tiro);
         lastShotTime = TimeUtils.nanoTime();
     }
+
+    /**
+     * times and generates the projectiles for the player's shots
+     * @param angle the angle at which the player will fire
+     */
 
     public void heroFire(float angle) {
 
@@ -159,11 +202,19 @@ public class GameManager {
         }
     }
 
+    /**
+     * generates the boss's minions
+     */
+
     public void generateMinions(){
         Minion bicho = new Minion(chefao);
         bicho.setTexture(minionImage);
         minions.add(bicho);
     }
+
+    /**
+     * makes the boss's shots move and collide with other objects
+     */
 
     private void bossFireIterator(){
 
@@ -182,6 +233,9 @@ public class GameManager {
 
     }
 
+    /**
+     * makes the player's shots move and collide with other objects
+     */
     private void heroFireIterator(){
 
 
@@ -204,6 +258,9 @@ public class GameManager {
         }
     }
 
+    /**
+     * makes the minions move and collide with the player
+     */
     private void minionIterator(){
 
         Iterator<Minion> iterMinion = minions.iterator();
@@ -217,6 +274,11 @@ public class GameManager {
 
     }
 
+    /**
+     * deals damage to the player if he gets too close to the boss
+     * @return if he the attack was done or not
+     */
+
     public Boolean swordAttack(){
         if(chefao.tooClose(jogador)){
             jogador.loseHP();
@@ -225,20 +287,28 @@ public class GameManager {
     return false;
     }
 
-
-
-
-
+    /**
+     * changes the game state to one of victory
+     */
 
     private void winGame(){
         gameEnd = 1;
 
     }
 
+    /**
+     * changes the game state to one of defeat
+     */
+
     private void loseGame(){
         gameEnd = 2;
 
     }
+
+    /**
+     * gets the game state
+     * @return the game state
+     */
 
     public int getGameState(){
 

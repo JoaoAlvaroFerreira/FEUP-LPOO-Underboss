@@ -21,7 +21,10 @@ public class EndScreen implements Screen {
     Texture loseScreen;
     int vitoria;
 
-
+    /**
+     * constructor for the EndScreen class
+     * @param gam
+     */
     public EndScreen(Underboss gam) {
         this.game = gam;
         vitoria = gam.manager.getGameState();
@@ -35,6 +38,10 @@ public class EndScreen implements Screen {
 
     }
 
+    /**
+     * renders either a win or lose screen and allows the player to go back and play again
+     * @param delta
+     */
     @Override
     public void render(float delta) {
 
@@ -64,30 +71,54 @@ public class EndScreen implements Screen {
         }
     }
 
-
+    /**
+     * resizes the screen if needed (not used)
+     * @param width
+     * @param height
+     */
     @Override
     public void resize(int width, int height) {
     }
 
+    /**
+     * shows the screen (not used)
+     */
     @Override
     public void show() {
+
     }
+
+    /**
+     * hides the screen (not used)
+     */
 
     @Override
     public void hide() {
     }
 
+    /**
+     * pauses the screen activities
+     */
+
     @Override
     public void pause() {
     }
 
+    /**
+     * resumes the screen activities
+     */
     @Override
     public void resume() {
     }
 
+    /**
+     * disposes of the elements previously loaded onto the screen
+     */
+
     @Override
     public void dispose() {
 
-
+        game.batch.dispose();
+        game.font.dispose();
     }
 }

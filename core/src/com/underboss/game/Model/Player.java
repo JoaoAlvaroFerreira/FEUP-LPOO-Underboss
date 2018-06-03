@@ -13,21 +13,40 @@ public class Player extends Character {
     MyInputProcessor vibra;
     Texture playerImage;
 
+    /**
+     * the default constructor for the player class
+     */
     public Player(){
         super();
        initVariables();
     }
+
+    /**
+     * a constructor for the player class
+     * @param x
+     * @param y
+     */
 
     public Player(int x, int y){
         super(x, y);
        initVariables();
     }
 
+    /**
+     * a constructor for the player class
+     * @param x
+     * @param y
+     * @param HP
+     */
+
     public Player(int x, int y, int HP){
         super(x, y, HP);
         initVariables();
     }
 
+    /**
+     * initializes the variables associated with a player
+     */
     private void initVariables(){
 
         this.height = 78;
@@ -36,40 +55,59 @@ public class Player extends Character {
         TimeSinceHit = 0;
         SafetyTime = 2000000000;
     }
+
+    /**
+     * gets the player's image
+     * @return playerImage
+     */
     public Texture getPlayerImage(){
         return playerImage;
     }
 
+    /**
+     * sets the player's image
+     * @param textura
+     */
     public void setTexture(Texture textura){
         playerImage = textura;
     }
 
-    void setX(int x){
-        this.x = x;
-    }
 
-    void setY(int y){
-        this.y = y;
-    }
-
-
-
+    /**
+     * makes the player character walk up
+     */
     public void walkUp(){
         setY(this.getY() + 400 * Gdx.graphics.getDeltaTime());
     };
 
+    /**
+     * makes the player character walk down
+     */
     public void walkDown(){
         setY(this.getY() - 400 * Gdx.graphics.getDeltaTime());
     };
 
+    /**
+     * makes the player character walk left
+     */
     public void walkLeft(){
         setX(this.getX() - 400 * Gdx.graphics.getDeltaTime());
     };
+
+    /**
+     * makes the player character walk right
+     */
 
     public void walkRight(){
         setX(this.getX() + 400 * Gdx.graphics.getDeltaTime());
     };
 
+
+    /**
+     * deals damage from contact with a minion to the player
+     * @param bicho
+     * @return if the minion did damage or not
+     */
     public Boolean minionDamage(Minion bicho){
 
         if (bicho.overlaps(this)) {
@@ -84,6 +122,9 @@ public class Player extends Character {
         return false;
     }
 
+    /**
+     * makes the player temporarily invincible, giving him a period of invulnerability after getting hit
+     */
     public void makePlayerInvincible(){
         this.setState(4);
         this.TimeSinceHit = TimeUtils.nanoTime();
@@ -91,13 +132,18 @@ public class Player extends Character {
 
     }
 
+    /**
+     * returns the player back to normal state
+     */
     public void makePlayerNormal(){
         this.setState(0);
         TimeSinceHit = 0;
     }
 
 
-
+    /**
+     * custom method to lose HP for the player, integrating the temporary invulnerability
+     */
     @Override
     public void loseHP(){
 
@@ -115,6 +161,9 @@ public class Player extends Character {
         checkState();
     }
 
+    /**
+     * custom method to check state for the player, integrating the temporary invulnerability
+     */
     @Override
     public void checkState() {
 
@@ -133,8 +182,6 @@ public class Player extends Character {
 
         poisonTick();
     }
-
-
 
 
 }

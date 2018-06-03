@@ -8,6 +8,10 @@ public class Minion extends Character {
     float auxX,auxY;
     Texture  minionImage;
 
+    /**
+     * constructor for the minion class, an enemy summoned by a boss
+     * @param chefe the boss that summoned this minion
+     */
     public Minion(Boss chefe){
 
         this.x = chefe.getX();
@@ -19,6 +23,11 @@ public class Minion extends Character {
 
     }
 
+    /**
+     * moves the minion in the player's direction
+     * @param jogador
+     */
+
     public void move(Player jogador){
         auxX = jogador.getX() - this.getX() ;
         auxY = jogador.getY() - this.getY() ;
@@ -27,15 +36,29 @@ public class Minion extends Character {
         setY(getY() + auxY * Gdx.graphics.getDeltaTime());
     }
 
+    /**
+     * gets the minion's image
+     * @return minionImage
+     */
+
 
     public Texture getMinionImage(){
         return minionImage;
     }
 
+    /**
+     * sets the minion's image
+     * @param textura
+     */
+
     public void setTexture(Texture textura){
         minionImage = textura;
     }
 
+    /**
+     * prevents the minion from leaving the bounds of the screen and returns it to normality if he does leave
+     * @return
+     */
     public Boolean outofbounds()
     {
         if (this.getX() < 0 || this.getX() > 800 || this.getY() < 0 || this.getY() > 480)

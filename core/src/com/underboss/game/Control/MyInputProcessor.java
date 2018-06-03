@@ -13,17 +13,33 @@ public class MyInputProcessor implements InputProcessor {
     GameManager controlo;
     Ecra camera;
 
+    /**
+     * constructor for the input processor
+     * @param jogador the player who will be controlled by these inputs
+     */
     public MyInputProcessor(Player jogador){
 
         this.jogador = jogador;
     }
 
+    /**
+     * setting up the game manager as the controller
+     * @param controlo a static GameManager
+     */
     public void setControlo(GameManager controlo) {
         this.controlo = controlo;
     }
 
+    /**
+     * setting up the screen, important for the touchscreen capabilities
+     * @param camera the screen
+     */
+
     public void setCamera(Ecra camera){this.camera = camera;}
 
+    /**
+     * processes user input at its most basic form, including touch screen, gyroscope and accelerometer
+     */
     public void processUserInput(){
 
         // process user input
@@ -69,6 +85,12 @@ public class MyInputProcessor implements InputProcessor {
 
     }
 
+    /**
+     * processes what happens when pressing certain keys go down
+     * @param keycode the key that was pressed
+     * @return false
+     */
+
     public boolean keyDown (int keycode) {
 
         if(keycode == Input.Keys.W)
@@ -85,32 +107,81 @@ public class MyInputProcessor implements InputProcessor {
         return false;
     }
 
+    /**
+     * processes what happens when pressing certain keys go up
+     * @param keycode the key that stopped being pressed
+     * @return false
+     */
+
 
 
     public boolean keyUp (int keycode) {
         return false;
     }
 
+    /**
+     * processes what happens when pressing certain keys get typed
+     * @param character the key that was typed
+     * @return false
+     */
+
     public boolean keyTyped (char character) {
         return false;
     }
+    /**
+     * processes what happens when touching down on certain parts of the screen
+     * @param x
+     * @param y
+     * @param pointer
+     * @param button
+     * @return false
+     */
 
     public boolean touchDown (int x, int y, int pointer, int button) {
         return false;
     }
 
+    /**
+     * processes what happens when releasing a touch on certain parts of the screen
+     * @param x
+     * @param y
+     * @param pointer
+     * @param button
+     * @return false
+     */
+
     public boolean touchUp (int x, int y, int pointer, int button) {
         return false;
     }
+
+    /**
+     * processes what happens when dragging on certain parts of the screen
+     * @param x
+     * @param y
+     * @param pointer
+     * @return false
+     */
 
     public boolean touchDragged (int x, int y, int pointer) {
         return false;
     }
 
+    /**
+     * processes what happens when moving your mouse
+     * @param x
+     * @param y
+     * @return false
+     */
+
     public boolean mouseMoved (int x, int y) {
         return false;
     }
 
+    /**
+     * processes what happens when scrolling your mouse
+     * @param amount
+     * @return false
+     */
     public boolean scrolled (int amount) {
         return false;
     }

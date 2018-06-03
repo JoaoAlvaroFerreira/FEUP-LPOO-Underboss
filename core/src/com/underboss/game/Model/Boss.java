@@ -18,20 +18,38 @@ public class Boss extends Character {
     int fireSpeed;
     boolean jamudou;
 
+    /**
+     * constructor for boss class
+     */
     public Boss() {
         super();
         initVariables();
     }
 
+    /**
+     * constructor for boss class
+     * @param x
+     * @param y
+     */
     public Boss(int x, int y) {
         super(x, y);
         initVariables();
     }
+
+    /**
+     * constructor for boss class
+     * @param x
+     * @param y
+     * @param HP
+     */
     public Boss(int x, int y, int HP) {
         super(x, y, HP);
        initVariables();
     }
 
+    /**
+     * auxiliary method for the constructors that initiates variables
+     */
     private void initVariables(){
         angle = 0;
         fireFrequency = 2000000000;
@@ -41,18 +59,33 @@ public class Boss extends Character {
         jamudou = false;
     }
 
+    /**
+     * returns the boss's image
+     * @return bossImage
+     */
 
     public Texture getBossImage() {
         return bossImage;
     }
 
+    /**
+     * sets the boss's image
+     * @param textura
+     */
     public void setTexture(Texture textura){
         bossImage = textura;
     }
 
-
+    /**
+     * returns the frequency at which the boss is firing
+     * @return fireFrequency
+     */
     public double getFireFrequency(){ return fireFrequency;   }
 
+    /**
+     * moves the boss in unpredictable directions
+     * @param delta
+     */
     public void move(double delta) {
 
 
@@ -81,12 +114,25 @@ public class Boss extends Character {
 
     }
 
+    /**
+     * doubles the boss's shot speed, but halves his rate of fire
+     */
     public void doubleFire(){ fireFrequency = fireFrequency/2;
     fireSpeed = 2*fireSpeed;}
+
+    /**
+     * returns the boss's shot speed
+     * @return fireSpeed
+     */
 
     public int getFireSpeed() {
         return fireSpeed;
     }
+
+    /**
+     * changes the boss's angle so that he always faces the player
+     * @param jogador
+     */
 
     public void angleChange(Player jogador) {
         if (this.getX() <= jogador.getX() && this.getY() <= jogador.getY())
@@ -109,6 +155,11 @@ public class Boss extends Character {
     }
 
 
+    /**
+     * auxiliary method to calculate the boss's angle
+     * @param jogador
+     * @return pre-processed boss angle
+     */
     private float auxCalc(Player jogador)
     {
         float auxX, auxY;
@@ -117,6 +168,12 @@ public class Boss extends Character {
         return (float)Math.toDegrees(Math.tanh(auxY/auxX));
 
     }
+
+    /**
+     * checks if the player is too close to the boss
+     * @param jogador
+     * @return if the player is too close
+     */
 
     public Boolean tooClose(Player jogador){
 

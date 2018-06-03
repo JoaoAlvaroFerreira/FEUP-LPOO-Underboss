@@ -49,14 +49,6 @@ public class Boss extends Character {
 
     public double getFireFrequency(){ return fireFrequency;   }
 
-    void setX(int x) {
-        this.x = x;
-    }
-
-    void setY(int y) {
-        this.y = y;
-    }
-
     public void move(double delta) {
 
 

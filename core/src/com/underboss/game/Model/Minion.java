@@ -14,6 +14,8 @@ public class Minion extends Character {
         this.y = chefe.getY();
         this.HP = 2;
         this.maxHP = 2;
+        setWidth(80);
+        setHeight(80);
 
     }
 

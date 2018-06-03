@@ -48,24 +48,24 @@ public class MyInputProcessor implements InputProcessor {
 
 
 
-            if(Gdx.input.getGyroscopeX() > 3)
+            if(Gdx.input.getGyroscopeX() > 1)
                 controlo.heroFire(0);
-            if(Gdx.input.getGyroscopeX() < -3)
+            if(Gdx.input.getGyroscopeX() < -1)
                 controlo.heroFire(180);
-            if(Gdx.input.getGyroscopeY() > 3)
+            if(Gdx.input.getGyroscopeY() > 1)
                 controlo.heroFire(90);
-            if(Gdx.input.getGyroscopeY() < -3)
+            if(Gdx.input.getGyroscopeY() < -1)
                 controlo.heroFire(270);
 
 
-//        if(Gdx.input.getAccelerometerY() > 3)
-//            controlo.heroFire(0);
-//        if(Gdx.input.getAccelerometerY() < -3)
-//            controlo.heroFire(180);
-//        if(Gdx.input.getAccelerometerZ() > 3)
-//            controlo.heroFire(90);
-//        if(Gdx.input.getAccelerometerZ() < -3)
-//            controlo.heroFire(270);
+        if(Gdx.input.getAccelerometerY() > 5)
+            controlo.heroFire(0);
+        if(Gdx.input.getAccelerometerY() < -5)
+            controlo.heroFire(180);
+        if(Gdx.input.getAccelerometerZ() > 5)
+            controlo.heroFire(90);
+        if(Gdx.input.getAccelerometerZ() < -5)
+            controlo.heroFire(270);
 
 
 //        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)){
